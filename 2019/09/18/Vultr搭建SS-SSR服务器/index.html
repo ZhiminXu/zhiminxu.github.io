@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Category: 工具使用 | 北辰之远</title>
+  <title>Vultr搭建SS/SSR服务器 | 北辰之远</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="北辰之远">
-<meta property="og:url" content="http://yoursite.com/categories/工具使用/index.html">
+  <meta name="description" content="简要说明基于Vultr搭建SS/SSR服务器的步骤">
+<meta name="keywords" content="Vultr,SS,SSR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vultr搭建SS&#x2F;SSR服务器">
+<meta property="og:url" content="http://yoursite.com/2019/09/18/Vultr搭建SS-SSR服务器/index.html">
 <meta property="og:site_name" content="北辰之远">
+<meta property="og:description" content="简要说明基于Vultr搭建SS/SSR服务器的步骤">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-18T09:32:58.012Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="北辰之远">
+<meta name="twitter:title" content="Vultr搭建SS&#x2F;SSR服务器">
+<meta name="twitter:description" content="简要说明基于Vultr搭建SS/SSR服务器的步骤">
   
     <link rel="alternative" href="/atom.xml" title="北辰之远" type="application/atom+xml">
   
@@ -150,36 +155,71 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Vultr搭建SS-SSR服务器" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/18/Vultr搭建SS-SSR服务器/" class="archive-article-date">
-  	<time datetime="2019-09-18T07:32:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/18/Vultr搭建SS-SSR服务器/">Vultr搭建SS/SSR服务器</a>
+    <h1 class="article-title" itemprop="name">
+      Vultr搭建SS/SSR服务器
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/18/Vultr搭建SS-SSR服务器/" class="archive-article-date">
+  	<time datetime="2019-09-18T07:32:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-注册Vultr"><a href="#1-注册Vultr" class="headerlink" title="1.注册Vultr"></a>1.注册Vultr</h1><p>注册<a href="www.vultr.com">Vultr</a>账户，验证邮箱，并充值，支持信用卡、Paypal、微信、支付宝甚至比特币。</p>
+<h1 id="2-安装服务器"><a href="#2-安装服务器" class="headerlink" title="2.安装服务器"></a>2.安装服务器</h1><p>选择服务器、地区、操作系统、参数、价格。注意：操作系统选择<code>centos6 x64</code>版本，否则后续无法安装锐速破解版。</p>
+<a id="more"></a>
+<p>安装服务器之后，本地使用<code>ping</code>命令，确认改服务器ip可以<code>ping</code>通，如果<code>ping</code>不通，则要删除该服务器。重新选择地区，重新安装服务器。</p>
+<p>点击服务器列表OS列下方的方块状图标，可查看服务器的各种信息，包括用户名秘密等。</p>
+<h1 id="3-安装ShadowSocksR"><a href="#3-安装ShadowSocksR" class="headerlink" title="3.安装ShadowSocksR"></a>3.安装ShadowSocksR</h1><p>使用View Console打开远程控制台，输入用户名（一般为<code>root</code>）和密码登录。输入以下命令：</p>
+<blockquote>
+<p>wget –no-check-certificate <a href="http://www.vofac.com/download/66R.sh&amp;&amp;bash" target="_blank" rel="noopener">http://www.vofac.com/download/66R.sh&amp;&amp;bash</a> 66R.sh</p>
+</blockquote>
+<p>根据提示，输入密码、端口、加密方式等信息，一路回车。安装完成后，ShadowsocksR的配置信息将显示为红色。</p>
+<h1 id="4-安装锐速破解版"><a href="#4-安装锐速破解版" class="headerlink" title="4.安装锐速破解版"></a>4.安装锐速破解版</h1><p>继续输入以下命令：</p>
+<blockquote>
+<p>wget –no-check-certificate -O appex.sh <a href="https://raw.githubusercontent.com/0oVicero0/serverSpeeder_Install/master/appex.sh" target="_blank" rel="noopener">https://raw.githubusercontent.com/0oVicero0/serverSpeeder_Install/master/appex.sh</a> &amp;&amp; bash appex.sh install ‘2.6.32-642.el6.x86_64’</p>
+</blockquote>
+<p>系统将自行下载脚本文件并运行，一路回车即可完成安装。</p>
+<h1 id="5-本地使用"><a href="#5-本地使用" class="headerlink" title="5.本地使用"></a>5.本地使用</h1><p>安装Shadowsocks安卓版或PC版，按照第三节提示的信息添加服务器配置，即可使用。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -199,7 +239,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -212,176 +252,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/18/Vultr搭建SS-SSR服务器/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/02/BIMServer的安装与部署/" class="archive-article-date">
-  	<time datetime="2019-09-02T08:26:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/02/BIMServer的安装与部署/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">BIMServer的安装与部署</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/02/BIMServer的安装与部署/">BIMServer的安装与部署</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">BIMServer</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bimviews</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具使用//" class="article-tag-list-link color5">工具使用</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/30/基于Hexo与Github的博客系统搭建/" class="archive-article-date">
-  	<time datetime="2019-08-30T09:05:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/30/基于Hexo与Github的博客系统搭建/">基于hexo与github的博客系统搭建</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具使用//" class="article-tag-list-link color5">工具使用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/30/Git与Github的使用/" class="archive-article-date">
-  	<time datetime="2019-08-30T08:46:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/30/Git与Github的使用/">Git与Github的使用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/工具使用//" class="article-tag-list-link color5">工具使用</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -404,10 +372,10 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
