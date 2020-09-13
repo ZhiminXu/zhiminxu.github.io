@@ -199,6 +199,10 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">premake5</a>
         		</li>
       		 
@@ -208,10 +212,6 @@ var _hmt = _hmt || [];
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">OpenGL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		
 		</ul>
@@ -767,15 +767,9 @@ var _hmt = _hmt || [];
       
         <h1 id="1-Proj-4"><a href="#1-Proj-4" class="headerlink" title="1 Proj.4"></a>1 Proj.4</h1><p>通过坐标系proj4字符串创建projPJ类型坐标系，调用pj_transform函数实现。其中坐标系proj4字符串可在PROJ4-data文件夹中的epsg文件中搜索得到。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> x = dblSrcX;</span><br><span class="line"><span class="keyword">double</span> y = dblSrcY;</span><br><span class="line"><span class="keyword">double</span> z = dblSrcZ;</span><br><span class="line"></span><br><span class="line">projPJ fRef, tRef;</span><br><span class="line">tRef = pj_init_plus(strDstProj.c_str());</span><br><span class="line">fRef = pj_init_plus(strSrcProj.c_str());</span><br><span class="line"></span><br><span class="line">pj_transform(fRef, tRef, <span class="number">1</span>, <span class="number">1</span>, &amp;x, &amp;y, &amp;z);</span><br></pre></td></tr></table></figure>
-
-<h1 id="2-GDAL"><a href="#2-GDAL" class="headerlink" title="2 GDAL"></a>2 GDAL</h1><p>GDAL底层坐标转换对Proj.4接口进行了封装，设置坐标系的方式变得更加多样。支持常用名、EPSG码、WKT、Proj4等多种方式。对坐标转换功能也进行了面向对象封装。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dbx = dbLon;</span><br><span class="line"><span class="keyword">double</span> dby = dbLat;</span><br><span class="line"><span class="keyword">double</span> dbz = dbHgt；</span><br><span class="line"></span><br><span class="line">OGRSpatialReference fRef, tRef;</span><br><span class="line">fRef.SetWellKnownGeogCS(<span class="string">"WGS84"</span>);</span><br><span class="line"><span class="comment">//EPSG::4547 CGCS2000 / 3-degree Gauss-Kruger CM 114E </span></span><br><span class="line">tRef.importFromEPSG(<span class="number">4547</span>);</span><br><span class="line"></span><br><span class="line">OGRCoordinateTransformation *coordTrans;</span><br><span class="line">coordTrans = OGRCreateCoordinateTransformation(&amp;fRef, &amp;tRef);</span><br><span class="line">coordTrans-&gt;Transform(<span class="number">1</span>, &amp;dbx, &amp;dby, &amp;dbz);</span><br></pre></td></tr></table></figure>
-
-<p>3 osgEarth<br>osgEarth坐标转换进一步调用了GDAL的坐标转换接口，使用更加方便。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">osg::ref_ptr&lt;osgEarth::SpatialReference&gt; pSrcSRS;</span><br><span class="line">osg::ref_ptr&lt;osgEarth::SpatialReference&gt; pDstSRS;</span><br><span class="line"></span><br><span class="line">pSrcSRS = osgEarth::SpatialReference::createFromPROJ4(strSrcProj);</span><br><span class="line">pDstSRS = osgEarth::SpatialReference::createFromPROJ4(strDstProj);</span><br><span class="line"></span><br><span class="line">osg::Vec3d vecOut;</span><br><span class="line">pSrcSRS-&gt;transform(vecPositon, pDstSRS, vecOut);</span><br></pre></td></tr></table></figure>
-
-<p>以上三种GIS开源库都可方便实现坐标转换。具体实践过程中，可根据项目开源库的依赖情况灵活选用。</p>
-
+        
+          <a class="article-more-a" href="/2018/12/04/三种开源库实现GIS坐标转换/#more">Read more… >></a>
+        
       
 
       
@@ -792,15 +786,15 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GIS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">坐标准换</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		
 		</ul>
@@ -822,6 +816,216 @@ var _hmt = _hmt || [];
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/12/04/三种开源库实现GIS坐标转换/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-设计模式七大原则总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/14/设计模式七大原则总结/">设计模式七大原则总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/09/14/设计模式七大原则总结/" class="archive-article-date">
+  	<time datetime="2018-09-14T00:49:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-单一职责原则-Single-Responsibility-Principle"><a href="#1-单一职责原则-Single-Responsibility-Principle" class="headerlink" title="1 单一职责原则(Single Responsibility Principle)"></a>1 单一职责原则(Single Responsibility Principle)</h1><p>目的：降低代码复杂度、系统解耦合、提高可读性</p>
+<p>含义：对于一个类，只有一个引起该类变化的原因；该类的职责是唯一的，且这个职责是唯一引起其他类变化的原因。</p>
+<p>解决：将不同的职责封装到不同的类或者模块中。 当有新的需求将现有的职责分为颗粒度更小的职责的时候，应该及时对现有代码进行重构。当系统逻辑足够简单，方法足够少，子类够少或后续关联够少时，也可以不必严格遵循你SRP原则，避免过度设计、颗粒化过于严重。</p>
+        
+          <a class="article-more-a" href="/2018/09/14/设计模式七大原则总结/#more">Read more… >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开发</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/设计模式//" class="article-tag-list-link color5">设计模式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/09/14/设计模式七大原则总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Regsvr32在64位机器上的用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/23/Regsvr32在64位机器上的用法/">Regsvr32在64位机器上的用法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/23/Regsvr32在64位机器上的用法/" class="archive-article-date">
+  	<time datetime="2017-03-23T01:47:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>regsvr32是windows上注册 OLE 控件（DLL 或 ActiveX ）的常用命令。注册 OLE 控件可更新 Windows 注册表中文件的位置和功能，从而使程序正常运行。32位系统注册32位控件，64位系统注册64位控件，一般都没有问题。一般容易出问题的是在64位操作系统上注册32位控件。</p>
+<p>注意：64 位版本的 Windows 操作系统上有两个版本的 Regsv32.exe 文件。</p>
+<blockquote>
+<p>64 位版本是<code>%systemroot%\System32\regsvr32.exe</code></p>
+<p>32 位版本是<code>%systemroot%\SysWoW64\regsvr32.exe</code></p>
+</blockquote>
+<p>SysWoW64中的“WoW”正是“Windows on Windows”的缩写，表示一个运行在64位操作系统环境下的32位子系统。因此要在64位操作系统上正确注册一个32位的OLE控件，要确保以下步骤：</p>
+<blockquote>
+<p>1.用管理员身份运行cmd；</p>
+<p>2.cd到控件所在路径;</p>
+<p>3.键入<code>%systemroot%\SysWoW64\regsvr32.exe xxx.ocx</code>并回车；</p>
+</blockquote>
+<p>为了能使32位的控件在32位操作系统与64位操作系统下都能正确自动注册，可采用批处理命令方式，在命令中自动判断操作系统是32位还是64位，并针对性调用不同的注册命令即可。具体方法如下：</p>
+<p>在控件所在路径下创建一个txt，重命名为<strong>reg.bat</strong>文件。<br>键入以下命令并保存，注意修改为自己的控件文件名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">reg Query <span class="string">"HKLM\Hardware\Description\System\CentralProcessor\0"</span> | find /i <span class="string">"x86"</span> &gt; NUL &amp;&amp; <span class="built_in">set</span> OS=32BIT || <span class="built_in">set</span> OS=64BIT</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> %OS%==32BIT %windir%\system32\regsvr32.exe <span class="string">"%~dp0QfltOCX.ocx"</span></span><br><span class="line"><span class="keyword">if</span> %OS%==64BIT %windir%\syswow64\regsvr32.exe <span class="string">"%~dp0QfltOCX.ocx"</span></span><br></pre></td></tr></table></figure>
+
+<p>使用管理员身份运行reg.bat即可。</p>
+<p>参考：</p>
+<p><a href="http://stackoverflow.com/questions/12322308/batch-file-to-check-64bit-or-32bit-os/19804271#19804271" target="_blank" rel="noopener">http://stackoverflow.com/questions/12322308/batch-file-to-check-64bit-or-32bit-os/19804271#19804271</a></p>
+<p><a href="https://support.microsoft.com/zh-cn/help/249873/how-to-use-the-regsvr32-tool-and-troubleshoot-regsvr32-error-messages" target="_blank" rel="noopener">https://support.microsoft.com/zh-cn/help/249873/how-to-use-the-regsvr32-tool-and-troubleshoot-regsvr32-error-messages
+</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开发</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Regsvr32</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">操作系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/工具使用//" class="article-tag-list-link color5">工具使用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/23/Regsvr32在64位机器上的用法/">展开全文 >></a>
         </p>
       
 
@@ -948,14 +1152,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">BIMServer</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">bimviews</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Cesium</a>
               </li>
              
@@ -964,31 +1160,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">BIMServer</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">bimviews</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">premake5</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">unit test</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">坐标准换</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1005,6 +1185,42 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">GIS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">坐标准换</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">premake5</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">unit test</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">OpenGL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Regsvr32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">操作系统</a>
               </li>
             
             <div class="clearfix"></div>
