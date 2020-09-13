@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: premake5 | 北辰之远</title>
+  <title>三种开源库实现GIS坐标转换 | 北辰之远</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="北辰之远">
-<meta property="og:url" content="http://yoursite.com/tags/premake5/index.html">
+  <meta name="description" content="简要说明Git与Github的使用">
+<meta name="keywords" content="开发,C++,GIS,坐标准换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三种开源库实现GIS坐标转换">
+<meta property="og:url" content="http://yoursite.com/2018/12/04/三种开源库实现GIS坐标转换/index.html">
 <meta property="og:site_name" content="北辰之远">
+<meta property="og:description" content="简要说明Git与Github的使用">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-09-13T09:33:14.699Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="北辰之远">
+<meta name="twitter:title" content="三种开源库实现GIS坐标转换">
+<meta name="twitter:description" content="简要说明Git与Github的使用">
   
     <link rel="alternative" href="/atom.xml" title="北辰之远" type="application/atom+xml">
   
@@ -152,36 +157,75 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-三种开源库实现GIS坐标转换" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/13/premake5实例教程/" class="archive-article-date">
-  	<time datetime="2020-09-13T09:11:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/13/premake5实例教程/">premake5实例教程</a>
+    <h1 class="article-title" itemprop="name">
+      三种开源库实现GIS坐标转换
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/12/04/三种开源库实现GIS坐标转换/" class="archive-article-date">
+  	<time datetime="2018-12-04T10:35:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-12-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Proj-4"><a href="#1-Proj-4" class="headerlink" title="1 Proj.4"></a>1 Proj.4</h1><p>通过坐标系proj4字符串创建projPJ类型坐标系，调用pj_transform函数实现。其中坐标系proj4字符串可在PROJ4-data文件夹中的epsg文件中搜索得到。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> x = dblSrcX;</span><br><span class="line"><span class="keyword">double</span> y = dblSrcY;</span><br><span class="line"><span class="keyword">double</span> z = dblSrcZ;</span><br><span class="line"></span><br><span class="line">projPJ fRef, tRef;</span><br><span class="line">tRef = pj_init_plus(strDstProj.c_str());</span><br><span class="line">fRef = pj_init_plus(strSrcProj.c_str());</span><br><span class="line"></span><br><span class="line">pj_transform(fRef, tRef, <span class="number">1</span>, <span class="number">1</span>, &amp;x, &amp;y, &amp;z);</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-GDAL"><a href="#2-GDAL" class="headerlink" title="2 GDAL"></a>2 GDAL</h1><p>GDAL底层坐标转换对Proj.4接口进行了封装，设置坐标系的方式变得更加多样。支持常用名、EPSG码、WKT、Proj4等多种方式。对坐标转换功能也进行了面向对象封装。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dbx = dbLon;</span><br><span class="line"><span class="keyword">double</span> dby = dbLat;</span><br><span class="line"><span class="keyword">double</span> dbz = dbHgt；</span><br><span class="line"></span><br><span class="line">OGRSpatialReference fRef, tRef;</span><br><span class="line">fRef.SetWellKnownGeogCS(<span class="string">"WGS84"</span>);</span><br><span class="line"><span class="comment">//EPSG::4547 CGCS2000 / 3-degree Gauss-Kruger CM 114E </span></span><br><span class="line">tRef.importFromEPSG(<span class="number">4547</span>);</span><br><span class="line"></span><br><span class="line">OGRCoordinateTransformation *coordTrans;</span><br><span class="line">coordTrans = OGRCreateCoordinateTransformation(&amp;fRef, &amp;tRef);</span><br><span class="line">coordTrans-&gt;Transform(<span class="number">1</span>, &amp;dbx, &amp;dby, &amp;dbz);</span><br></pre></td></tr></table></figure>
+
+<p>3 osgEarth<br>osgEarth坐标转换进一步调用了GDAL的坐标转换接口，使用更加方便。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">osg::ref_ptr&lt;osgEarth::SpatialReference&gt; pSrcSRS;</span><br><span class="line">osg::ref_ptr&lt;osgEarth::SpatialReference&gt; pDstSRS;</span><br><span class="line"></span><br><span class="line">pSrcSRS = osgEarth::SpatialReference::createFromPROJ4(strSrcProj);</span><br><span class="line">pDstSRS = osgEarth::SpatialReference::createFromPROJ4(strDstProj);</span><br><span class="line"></span><br><span class="line">osg::Vec3d vecOut;</span><br><span class="line">pSrcSRS-&gt;transform(vecPositon, pDstSRS, vecOut);</span><br></pre></td></tr></table></figure>
+
+<p>以上三种GIS开源库都可方便实现坐标转换。具体实践过程中，可根据项目开源库的依赖情况灵活选用。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>感谢您的支持与鼓励！<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -191,25 +235,21 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">premake5</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">unit test</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">OpenGL</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">GIS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">坐标准换</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -222,16 +262,141 @@ var _hmt = _hmt || [];
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/12/04/三种开源库实现GIS坐标转换/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/08/30/Git与Github的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Git与Github的使用
+        
+      </div>
+    </a>
   
   
-    </div></section>
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Proj-4"><span class="toc-number">1.</span> <span class="toc-text">1 Proj.4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-GDAL"><span class="toc-number">2.</span> <span class="toc-text">2 GDAL</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
+  
+
+  
+
+  
+  
+    <div id="gitalk-container" style="padding: 0px 30px 0px 30px;"></div> 
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+
+if(true){
+	var gitalk = new Gitalk({
+  	clientID: '809f75968ca4f8092c53',
+  	clientSecret: 'edeec97d7274186774ed0432c7c4a734a11a3482',
+  	repo: 'zhiminxu.github.io',
+  	owner: 'ZhiminXu',
+  	admin: ['ZhiminXu'],
+  	id: 'Tue Dec 04 2018 18:35:33 GMT+0800',
+  	distractionFreeMode: 'true'
+})
+gitalk.render('gitalk-container') 
+}
+</script>
     
 
 
@@ -255,9 +420,9 @@ var _hmt = _hmt || [];
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
