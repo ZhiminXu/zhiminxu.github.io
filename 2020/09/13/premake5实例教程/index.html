@@ -6,20 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>BIMServer的安装与部署 | 北辰之远</title>
+  <title>premake5实例教程 | 北辰之远</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简要说明BIMServer的安装与部署">
-<meta name="keywords" content="开发,BIMServer,bimviews">
+  <meta name="description" content="简要说明Git与Github的使用">
+<meta name="keywords" content="开发,premake5,unit test,OpenGL,C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BIMServer的安装与部署">
-<meta property="og:url" content="http://yoursite.com/2019/09/02/BIMServer的安装与部署/index.html">
+<meta property="og:title" content="premake5实例教程">
+<meta property="og:url" content="http://yoursite.com/2020/09/13/premake5实例教程/index.html">
 <meta property="og:site_name" content="北辰之远">
-<meta property="og:description" content="简要说明BIMServer的安装与部署">
+<meta property="og:description" content="简要说明Git与Github的使用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-29T06:44:52.785Z">
+<meta property="og:image" content="http://yoursite.com/2020/09/13/premake5实例教程/generate.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/13/premake5实例教程/proj.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/13/premake5实例教程/result.jpg">
+<meta property="og:image" content="http://yoursite.com/2020/09/13/premake5实例教程/test.jpg">
+<meta property="og:updated_time" content="2020-09-13T09:19:22.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BIMServer的安装与部署">
-<meta name="twitter:description" content="简要说明BIMServer的安装与部署">
+<meta name="twitter:title" content="premake5实例教程">
+<meta name="twitter:description" content="简要说明Git与Github的使用">
+<meta name="twitter:image" content="http://yoursite.com/2020/09/13/premake5实例教程/generate.jpg">
   
     <link rel="alternative" href="/atom.xml" title="北辰之远" type="application/atom+xml">
   
@@ -157,38 +162,90 @@ var _hmt = _hmt || [];
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-BIMServer的安装与部署" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-premake5实例教程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      BIMServer的安装与部署
+      premake5实例教程
     </h1>
   
 
         
-        <a href="/2019/09/02/BIMServer的安装与部署/" class="archive-article-date">
-  	<time datetime="2019-09-02T08:26:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-02</time>
+        <a href="/2020/09/13/premake5实例教程/" class="archive-article-date">
+  	<time datetime="2020-09-13T09:11:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1、下载安装JRE"><a href="#1、下载安装JRE" class="headerlink" title="1、下载安装JRE"></a>1、下载安装JRE</h1><p>本机位win10 64位，应选择64位JRE下载。<br>最新版本文件如下：jre-8u221-windows-x64.exe。</p>
-<h1 id="2、下载安装BIMServer及插件"><a href="#2、下载安装BIMServer及插件" class="headerlink" title="2、下载安装BIMServer及插件"></a>2、下载安装BIMServer及插件</h1><p>BIMServer安装包、插件及测试数据已有Github用户<em>ibrucekong</em>提供下载，链接为：<a href="https://codeload.github.com/ibrucekong/bimserver-env/zip/master" target="_blank" rel="noopener">https://codeload.github.com/ibrucekong/bimserver-env/zip/master</a>。<br>在不包含空格和中文的文件夹路径下，新建文件夹bimserver将下载的压缩包中的bimserverjar-1.5.88.jar文件放入，双击启动即可开始安装。</p>
+        <h1 id="premakeExample"><a href="#premakeExample" class="headerlink" title="premakeExample"></a>premakeExample</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><p>本文讲解如何基于premake5创建一个典型的C++解决方案，该解决方案包含三个项目：</p>
+<ul>
+<li>一个依赖GLFW动态库的动态库项目ExampleDll</li>
+<li>一个依赖ExampleDll动态库的窗口程序APP</li>
+<li>一个基于Catch的单元测试程序UnitTest</li>
+</ul>
 <a id="more"></a>
-<h1 id="3、配置BIMServer"><a href="#3、配置BIMServer" class="headerlink" title="3、配置BIMServer"></a>3、配置BIMServer</h1><p>Address设置为本机IP。maxHeapSize设置为合理大小，最好保证2G以上。<br>点击Start等待日志文本框出现一下字样：</p>
+
+<p>所有代码已上传Github，<a href="https://github.com/ZhiminXu/premakeExample" target="_blank" rel="noopener">链接</a>。</p>
+<h2 id="2-你需要准备"><a href="#2-你需要准备" class="headerlink" title="2 你需要准备"></a>2 你需要准备</h2><ul>
+<li>premake5.exe程序</li>
+<li>一个文本编辑器</li>
+<li>一个支持C++11的编译器，因为源代码使用了C++11特性</li>
+<li>一个支持OpenGL 1.1的显卡</li>
+</ul>
+<h2 id="3-文件的组织结构"><a href="#3-文件的组织结构" class="headerlink" title="3 文件的组织结构"></a>3 文件的组织结构</h2><p>首先需要确定整个解决方案中源代码、三方库、二进制等文件的组织结构，本文创建的文件结构如下：</p>
 <blockquote>
-<p><em>[main]: Server started successfully</em></p>
+<p>premakeExample/<br>&emsp;|–premake5.lua （premake脚本文件）<br>&emsp;|–prj/ (生成的解决方案与各项目配置文件路径)<br>&emsp;|–build/<br>&emsp;|&emsp;|–target/ (目标生成路径)<br>&emsp;|&emsp;|–obj/ （中间文件生成路径）<br>&emsp;|–bin/ (最终发布的二进制文件路径)<br>&emsp;|–3rd/ (第三方库文件路径)<br>&emsp;|&emsp;|–Catch (Catch单元测试框架头文件路径)<br>&emsp;|&emsp;|–glfw （glfw三方库相关文件路径） </p>
 </blockquote>
-<p>点击 Launch Webbrowser打开浏览器配置界面，设置服务名称、用户名账号、密码等，跳过email服务。<br>安装所有插件，选择<em>upload JAR files of plugins</em>，手动选择所有文件。<br>Finish界面点击 Setup，开始安装，等待安装完毕，日志框出现：</p>
+<h2 id="4-下载所需文件"><a href="#4-下载所需文件" class="headerlink" title="4 下载所需文件"></a>4 下载所需文件</h2><ul>
+<li>premake5.exe <a href="https://github.com/premake/premake-core/releases" title="premake5.exe下载链接" target="_blank" rel="noopener">下载</a></li>
+<li>glfw三方库 <a href="https://www.glfw.org/download.html" title="glfw下载路径" target="_blank" rel="noopener">下载</a></li>
+</ul>
 <blockquote>
-<p><em>Setup Successful……</em></p>
+<p>本文以64位系统为例，需下载64位二进制库，也可以下载32位，但要记得在后面lua脚本中改变architecture配置。</p>
 </blockquote>
-<h1 id="4、使用bimviews"><a href="#4、使用bimviews" class="headerlink" title="4、使用bimviews"></a>4、使用bimviews</h1><p>配置完毕后，刷新页面。出现WebModules，主要使用的是bimviews，点击打开即可使用。</p>
+<blockquote>
+<p>将下载解压后的include和<code>lib-vc*</code>文件夹放在premakeExample/3rd/glfw文件夹下，<code>*</code>指代不同的vs版本，需与后续生成配置文件的vs版本一致。</p>
+</blockquote>
+<blockquote>
+<p>将lib-vc*路径下的glfw3.dll拷贝纸premakeExample/bin路径下</p>
+</blockquote>
+<ul>
+<li>catch是一个只有头文件的依赖库，将Catch.hpp(<a href="https://raw.githubusercontent.com/catchorg/Catch2/master/single_include/catch2/catch.hpp" title="catch.hpp下载路径" target="_blank" rel="noopener">下载</a>)放在premakeExample/3rd/Catch/include路径下即可。</li>
+</ul>
+<h2 id="5-添加代码"><a href="#5-添加代码" class="headerlink" title="5 添加代码"></a>5 添加代码</h2><h3 id="5-1-ExampleDll"><a href="#5-1-ExampleDll" class="headerlink" title="5.1 ExampleDll"></a>5.1 ExampleDll</h3><p>ExampleDll库只是对glfw中的GLFWwindow进行了简单封装，隐藏了window的内部实现细节。Window类通过<code>_declspec(dllexport)</code>导出。</p>
+<ul>
+<li><p>ExampleDll.hpp代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> EXAMPLE_DLL_HPP</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_DLL_HPP 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GLFWwindow</span>;</span></span><br><span class="line"><span class="keyword">namespace</span> ExDLL</span><br><span class="line">&#123;	</span><br><span class="line">	<span class="class"><span class="keyword">class</span> _<span class="title">declspec</span>(<span class="title">dllexport</span>) <span class="title">Window</span></span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">		Window(<span class="keyword">int</span> width, <span class="keyword">int</span>  height, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; title);</span><br><span class="line">		~Window();</span><br><span class="line">		<span class="function"><span class="keyword">bool</span> <span class="title">shouldClose</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">pollEvents</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line">		<span class="function"><span class="keyword">void</span> <span class="title">swapBuffers</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line">		<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; getWindowSize() <span class="keyword">const</span> <span class="keyword">noexcept</span>;	</span><br><span class="line">	<span class="keyword">private</span>:</span><br><span class="line">		GLFWwindow* wnd;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ExampleDll.cpp代码如下</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ExampleDll.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br><span class="line">	</span><br><span class="line"><span class="keyword">namespace</span> ExDLL</span><br><span class="line">&#123;</span><br><span class="line">	Window::Window(<span class="keyword">int</span> width, <span class="keyword">int</span> height, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; title)</span><br><span class="line">	&#123;</span><br><span class="line">		glfwInit();</span><br><span class="line">		wnd = glfwCreateWindow(width, height, title.c_str(), <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">		glfwMakeContextCurrent(wnd);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	Window::~Window()</span><br><span class="line">	&#123;</span><br><span class="line">		glfwDestroyWindow(wnd);</span><br><span class="line">		glfwTerminate();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">bool</span> Window::shouldClose() <span class="keyword">const</span> <span class="keyword">noexcept</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> glfwWindowShouldClose(wnd) != <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> Window::pollEvents() <span class="keyword">const</span> <span class="keyword">noexcept</span></span><br><span class="line">	&#123;</span><br><span class="line">		glfwPollEvents();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">void</span> Window::swapBuffers() <span class="keyword">const</span> <span class="keyword">noexcept</span></span><br><span class="line">	&#123;</span><br><span class="line">		glfwSwapBuffers(wnd);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; Window::getWindowSize() <span class="keyword">const</span> <span class="keyword">noexcept</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; sz&#123;&#125;;</span><br><span class="line">		glfwGetWindowSize(wnd, &amp;sz.first, &amp;sz.second);</span><br><span class="line">		<span class="keyword">return</span> sz;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-App"><a href="#5-2-App" class="headerlink" title="5.2 App"></a>5.2 App</h3><p>应用程序依赖Exampledll，创建一个窗口应用程序，并运用固定管线绘制一个红色的三角形。当然本教程不讲解OpenGL，如果想要学习OpenGL的使用，应该学习更先进的可编程管线。</p>
+<ul>
+<li>main.cpp代码如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ExampleDll.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined _WIN32</span></span><br><span class="line">    <span class="comment">//Windows平台使用OpenGL需要包含Windows.h</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line">	<span class="comment">//消除窗口程序的控制台界面</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">pragma</span> comment(linker,<span class="meta-string">"/subsystem:\"windows\" /entry:\"mainCRTStartup\""</span>)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gl/GL.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//导入ExampleDll中的Window类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> _<span class="title">declspec</span>(<span class="title">dllimport</span>) <span class="title">ExDLL</span>:</span>:Window;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ExDLL::Window window&#123; <span class="number">800</span>, <span class="number">600</span>, <span class="string">"Hello World!"</span> &#125;;</span><br><span class="line">	<span class="keyword">while</span> (!window.shouldClose())</span><br><span class="line">	&#123;</span><br><span class="line">		window.pollEvents();</span><br><span class="line">		<span class="comment">//为简单起见，使用了古老的固定管线</span></span><br><span class="line">		glColor3f(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">		glBegin(GL_TRIANGLES);</span><br><span class="line">			glVertex2f(<span class="number">-0.5f</span>, <span class="number">-0.5f</span>);</span><br><span class="line">			glVertex2f(<span class="number">0.5f</span>, <span class="number">-0.5f</span>);</span><br><span class="line">			glVertex2f(<span class="number">0</span>, <span class="number">0.5f</span>);</span><br><span class="line">		glEnd();</span><br><span class="line">		window.swapBuffers();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-UnitTest"><a href="#5-3-UnitTest" class="headerlink" title="5.3 UnitTest"></a>5.3 UnitTest</h3><p>单元测试程序检查创建的窗口大小是否与参数要求的大小一致。</p>
+<ul>
+<li>Test.cpp代码如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CATCH_CONFIG_MAIN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Catch.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ExampleDll.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line">TEST_CASE(<span class="string">"Window tests"</span>, <span class="string">"[ExampleDll]"</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">using</span> <span class="keyword">namespace</span> ExDLL;</span><br><span class="line">	Window w&#123; <span class="number">600</span>, <span class="number">400</span>, <span class="string">"Test Window"</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">auto</span> size = w.getWindowSize();</span><br><span class="line"></span><br><span class="line">	REQUIRE(size.first == <span class="number">600</span>);</span><br><span class="line">	REQUIRE(size.second == <span class="number">400</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-编写premake5-lua脚本文件"><a href="#6-编写premake5-lua脚本文件" class="headerlink" title="6 编写premake5.lua脚本文件"></a>6 编写premake5.lua脚本文件</h2><p>premake5.lua是生成工程配置文件的核心。</p>
+<ul>
+<li>premake5.lua代码如下：</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 最终解决方案的名称</span></span><br><span class="line">workspace <span class="string">"premakeExample"</span></span><br><span class="line">	<span class="comment">-- 解决方案与各项目配置文件生成路径</span></span><br><span class="line">	location <span class="string">"prj"</span></span><br><span class="line">	<span class="comment">-- 指定语言</span></span><br><span class="line">	language <span class="string">"C++"</span></span><br><span class="line">	<span class="comment">-- 指定架构 x64 或 x86 或  x86_64</span></span><br><span class="line">	architecture <span class="string">"x64"</span></span><br><span class="line">	<span class="comment">-- 配置类型</span></span><br><span class="line">	configurations &#123;<span class="string">"Debug"</span>,<span class="string">"Release"</span>&#125;</span><br><span class="line">	<span class="comment">-- 针对Debug配置类型的参数设置</span></span><br><span class="line">	filter &#123;<span class="string">"configurations:Debug"</span>&#125;</span><br><span class="line">		symbols <span class="string">"On"</span></span><br><span class="line">	<span class="comment">-- 针对Release配置类型的参数设置</span></span><br><span class="line">	filter &#123;<span class="string">"configurations:Release"</span>&#125;</span><br><span class="line">		optimize <span class="string">"On"</span></span><br><span class="line">	<span class="comment">-- 重置过滤器的其他设定</span></span><br><span class="line">	filter &#123;&#125;</span><br><span class="line">	<span class="comment">-- 目标文件生成路径 如%&#123;prj.name&#125;为内置的宏，指项目的名称，如后面的ExampleDll，App等</span></span><br><span class="line">	targetdir (<span class="string">"build/target/%&#123;prj.name&#125;/%&#123;cfg.longname&#125;"</span>)</span><br><span class="line">	<span class="comment">-- 中间文件生成路径</span></span><br><span class="line">	objdir (<span class="string">"build/obj/%&#123;prj.name&#125;/%&#123;cfg.longname&#125;"</span>)</span><br><span class="line">	<span class="comment">-- 编译后命令行，将目标文件拷贝至bin文件夹，注意../bin/是prj文件夹的相对路径</span></span><br><span class="line">	postbuildcommands&#123;</span><br><span class="line">		(<span class="string">"&#123;COPY&#125; %&#123;cfg.buildtarget.relpath&#125; \"../bin/\""</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"><span class="comment">-- 定义函数，包含glfw三方库头文件，可被其他工程调用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">includeGLFW</span><span class="params">()</span></span></span><br><span class="line">	includedirs <span class="string">"3rd/glfw/include"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- 定义函数，链接glfw三方库</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">linkGLFW</span><span class="params">()</span></span></span><br><span class="line">	<span class="comment">-- 指定lib的文件路径</span></span><br><span class="line">	libdirs <span class="string">"3rd/glfw/lib-vc2019"</span></span><br><span class="line">	<span class="comment">-- 指定lib文件名，即glfw3dll.lib，此处使用的是动态库</span></span><br><span class="line">	links <span class="string">"glfw3dll"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ExampleDll项目</span></span><br><span class="line">project <span class="string">"ExampleDll"</span></span><br><span class="line">	<span class="comment">-- 类型为动态库项目</span></span><br><span class="line">	kind <span class="string">"SharedLib"</span></span><br><span class="line">	<span class="comment">-- 代码文件，即ExampleDll文件夹下的所有文件</span></span><br><span class="line">	files <span class="string">"src/ExampleDll/**"</span></span><br><span class="line">	<span class="comment">-- 包含glfw头文件</span></span><br><span class="line">	includeGLFW()</span><br><span class="line">	<span class="comment">-- 链接glfw三方库</span></span><br><span class="line">	linkGLFW()</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数，链接ExampleDll动态库</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useExampleDLL</span><span class="params">()</span></span></span><br><span class="line">	includedirs <span class="string">"src/ExampleDll"</span></span><br><span class="line">	links <span class="string">"ExampleDll"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- App应用程序</span></span><br><span class="line">project <span class="string">"App"</span></span><br><span class="line">	<span class="comment">-- 类型为控制台程序</span></span><br><span class="line">	kind <span class="string">"ConsoleApp"</span></span><br><span class="line">	<span class="comment">-- 代码文件</span></span><br><span class="line">	files <span class="string">"src/App/**"</span></span><br><span class="line">	<span class="comment">-- 链接ExampleDll动态库</span></span><br><span class="line">	useExampleDLL()</span><br><span class="line">	<span class="comment">-- windows平台使用OpenGL需链接OpenGL32</span></span><br><span class="line">	filter <span class="string">"system:windows"</span></span><br><span class="line">		links &#123;<span class="string">"OpenGL32"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数，包含Catch</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">includeCatch</span><span class="params">()</span></span></span><br><span class="line">	includedirs <span class="string">"3rd/Catch/Include"</span></span><br><span class="line">	<span class="comment">-- 预定义宏，C++版本为C++11及以上</span></span><br><span class="line">	defines <span class="string">"CATCH_CPP11_OR_GREATER"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- UnitTests单元测试项目</span></span><br><span class="line">project <span class="string">"UnitTests"</span></span><br><span class="line">	<span class="comment">-- 类型为控制台程序</span></span><br><span class="line">	kind <span class="string">"ConsoleApp"</span></span><br><span class="line">	<span class="comment">-- 代码文件</span></span><br><span class="line">	files <span class="string">"src/UnitTests/**"</span></span><br><span class="line">	<span class="comment">-- 包含Catch</span></span><br><span class="line">	includeCatch()</span><br><span class="line">	<span class="comment">-- 链接ExamleDll</span></span><br><span class="line">	useExampleDLL()</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-生成工程文件并编译"><a href="#7-生成工程文件并编译" class="headerlink" title="7 生成工程文件并编译"></a>7 生成工程文件并编译</h2><p>premake5.exe运行时时会寻找调用命令路径下的premake5.lua文件，如果想生成工程配置文件，需在premakeExample路径下调用<code>premake5.exe &lt;action&gt;</code>，其中<code>action</code>可指定为<code>vs2019</code>或<code>gmake</code>，本文以vs2019为例。<br><img src="/2020/09/13/premake5实例教程/generate.jpg" alt="在这里插入图片描述"><br>执行命令后在prj文件夹下，生成的工程配置文件如下：<br><img src="/2020/09/13/premake5实例教程/proj.jpg" alt="在这里插入图片描述"><br>打开premakeExample.sln编译解决方案，在bin路径下运行app.exe，效果如下：<br><img src="/2020/09/13/premake5实例教程/result.jpg" alt="在这里插入图片描述"><br>命令行打开单元测试程序UnitTests.exe,效果如下：<br><img src="/2020/09/13/premake5实例教程/test.jpg" alt="在这里插入图片描述"></p>
 
       
 
@@ -237,11 +294,19 @@ var _hmt = _hmt || [];
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">BIMServer</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">premake5</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">bimviews</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">unit test</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">OpenGL</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
         		</li>
       		
 		</ul>
@@ -308,7 +373,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/02/BIMServer的安装与部署/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/13/premake5实例教程/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -322,18 +387,9 @@ var _hmt = _hmt || [];
   
 <nav id="article-nav">
   
-    <a href="/2019/09/18/Vultr搭建SS-SSR服务器/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Vultr搭建SS/SSR服务器
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/30/基于Hexo与Github的博客系统搭建/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">基于hexo与github的博客系统搭建</div>
+    <a href="/2020/08/29/Cesium-开发资源汇总/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">AwesomeCesium-Cesium开发资源</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -360,7 +416,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1、下载安装JRE"><span class="toc-number">1.</span> <span class="toc-text">1、下载安装JRE</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2、下载安装BIMServer及插件"><span class="toc-number">2.</span> <span class="toc-text">2、下载安装BIMServer及插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3、配置BIMServer"><span class="toc-number">3.</span> <span class="toc-text">3、配置BIMServer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4、使用bimviews"><span class="toc-number">4.</span> <span class="toc-text">4、使用bimviews</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#premakeExample"><span class="toc-number">1.</span> <span class="toc-text">premakeExample</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-简介"><span class="toc-number">1.1.</span> <span class="toc-text">1 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-你需要准备"><span class="toc-number">1.2.</span> <span class="toc-text">2 你需要准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-文件的组织结构"><span class="toc-number">1.3.</span> <span class="toc-text">3 文件的组织结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-下载所需文件"><span class="toc-number">1.4.</span> <span class="toc-text">4 下载所需文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-添加代码"><span class="toc-number">1.5.</span> <span class="toc-text">5 添加代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-ExampleDll"><span class="toc-number">1.5.1.</span> <span class="toc-text">5.1 ExampleDll</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-App"><span class="toc-number">1.5.2.</span> <span class="toc-text">5.2 App</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-UnitTest"><span class="toc-number">1.5.3.</span> <span class="toc-text">5.3 UnitTest</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-编写premake5-lua脚本文件"><span class="toc-number">1.6.</span> <span class="toc-text">6 编写premake5.lua脚本文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-生成工程文件并编译"><span class="toc-number">1.7.</span> <span class="toc-text">7 生成工程文件并编译</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -394,7 +450,7 @@ if(true){
   	repo: 'zhiminxu.github.io',
   	owner: 'ZhiminXu',
   	admin: ['ZhiminXu'],
-  	id: 'Mon Sep 02 2019 16:26:29 GMT+0800',
+  	id: 'Sun Sep 13 2020 17:11:47 GMT+0800',
   	distractionFreeMode: 'true'
 })
 gitalk.render('gitalk-container') 
