@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="北辰之远">
 <meta property="og:description" content="介绍了三种开源库实现GIS坐标准换的方法">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-13T10:15:16.729Z">
+<meta property="og:updated_time" content="2020-11-28T15:40:22.046Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="三种开源库实现GIS坐标转换">
 <meta name="twitter:description" content="介绍了三种开源库实现GIS坐标准换的方法">
@@ -190,7 +190,7 @@ var _hmt = _hmt || [];
 <h1 id="2-GDAL"><a href="#2-GDAL" class="headerlink" title="2 GDAL"></a>2 GDAL</h1><p>GDAL底层坐标转换对Proj.4接口进行了封装，设置坐标系的方式变得更加多样。支持常用名、EPSG码、WKT、Proj4等多种方式。对坐标转换功能也进行了面向对象封装。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dbx = dbLon;</span><br><span class="line"><span class="keyword">double</span> dby = dbLat;</span><br><span class="line"><span class="keyword">double</span> dbz = dbHgt；</span><br><span class="line"></span><br><span class="line">OGRSpatialReference fRef, tRef;</span><br><span class="line">fRef.SetWellKnownGeogCS(<span class="string">"WGS84"</span>);</span><br><span class="line"><span class="comment">//EPSG::4547 CGCS2000 / 3-degree Gauss-Kruger CM 114E </span></span><br><span class="line">tRef.importFromEPSG(<span class="number">4547</span>);</span><br><span class="line"></span><br><span class="line">OGRCoordinateTransformation *coordTrans;</span><br><span class="line">coordTrans = OGRCreateCoordinateTransformation(&amp;fRef, &amp;tRef);</span><br><span class="line">coordTrans-&gt;Transform(<span class="number">1</span>, &amp;dbx, &amp;dby, &amp;dbz);</span><br></pre></td></tr></table></figure>
 
-<p>3 osgEarth<br>osgEarth坐标转换进一步调用了GDAL的坐标转换接口，使用更加方便。</p>
+<h1 id="3-osgEarth"><a href="#3-osgEarth" class="headerlink" title="3 osgEarth"></a>3 osgEarth</h1><p>osgEarth坐标转换进一步调用了GDAL的坐标转换接口，使用更加方便。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">osg::ref_ptr&lt;osgEarth::SpatialReference&gt; pSrcSRS;</span><br><span class="line">osg::ref_ptr&lt;osgEarth::SpatialReference&gt; pDstSRS;</span><br><span class="line"></span><br><span class="line">pSrcSRS = osgEarth::SpatialReference::createFromPROJ4(strSrcProj);</span><br><span class="line">pDstSRS = osgEarth::SpatialReference::createFromPROJ4(strDstProj);</span><br><span class="line"></span><br><span class="line">osg::Vec3d vecOut;</span><br><span class="line">pSrcSRS-&gt;transform(vecPositon, pDstSRS, vecOut);</span><br></pre></td></tr></table></figure>
 
 <p>以上三种GIS开源库都可方便实现坐标转换。具体实践过程中，可根据项目开源库的依赖情况灵活选用。</p>
@@ -365,7 +365,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Proj-4"><span class="toc-number">1.</span> <span class="toc-text">1 Proj.4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-GDAL"><span class="toc-number">2.</span> <span class="toc-text">2 GDAL</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Proj-4"><span class="toc-number">1.</span> <span class="toc-text">1 Proj.4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-GDAL"><span class="toc-number">2.</span> <span class="toc-text">2 GDAL</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-osgEarth"><span class="toc-number">3.</span> <span class="toc-text">3 osgEarth</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -498,6 +498,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cesium</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">premake5</a>
               </li>
              
@@ -511,6 +519,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Regsvr32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -534,19 +550,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cesium</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Regsvr32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,10 +579,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>

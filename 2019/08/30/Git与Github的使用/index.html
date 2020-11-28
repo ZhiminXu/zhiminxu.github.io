@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="北辰之远">
 <meta property="og:description" content="简要说明Git与Github的使用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-13T10:13:54.942Z">
+<meta property="og:updated_time" content="2020-11-28T15:44:36.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git与Github的使用">
 <meta name="twitter:description" content="简要说明Git与Github的使用">
@@ -181,27 +181,46 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="一、注册Github"><a href="#一、注册Github" class="headerlink" title="一、注册Github"></a>一、注册Github</h1><p>注册完成之后会需要验证邮箱才能正常使用GitHub。<br>注册完成后，创建一个属于自己的库，包括库的名字，以及对库的介绍。</p>
-<h1 id="二、安装Git"><a href="#二、安装Git" class="headerlink" title="二、安装Git"></a>二、安装Git</h1><p>首先进入<a href="www.git-scm.com">Git官网</a>下载适合自己电脑的版本，执行默认安装选项。</p>
+        <h1 id="1-注册Github"><a href="#1-注册Github" class="headerlink" title="1 注册Github"></a>1 注册Github</h1><p>注册完成之后会需要验证邮箱才能正常使用GitHub。<br>注册完成后，创建一个属于自己的库，包括库的名字，以及对库的介绍。</p>
+<h1 id="2-安装Git"><a href="#2-安装Git" class="headerlink" title="2 安装Git"></a>2 安装Git</h1><p>首先进入<a href="www.git-scm.com">Git官网</a>下载适合自己电脑的版本，执行默认安装选项。</p>
 <a id="more"></a>
-<h1 id="三、配置密钥"><a href="#三、配置密钥" class="headerlink" title="三、配置密钥"></a>三、配置密钥</h1><p>在本地创建ssh key并填写到Github网站，实现本地git与Github的认证连接。</p>
-<h2 id="1-执行以下命令。邮箱为注册Github的邮箱，注意输入对应密码，其他选项可默认。"><a href="#1-执行以下命令。邮箱为注册Github的邮箱，注意输入对应密码，其他选项可默认。" class="headerlink" title="1.执行以下命令。邮箱为注册Github的邮箱，注意输入对应密码，其他选项可默认。"></a>1.执行以下命令。邮箱为注册Github的邮箱，注意输入对应密码，其他选项可默认。</h2><blockquote>
+<h1 id="3-配置密钥"><a href="#3-配置密钥" class="headerlink" title="3 配置密钥"></a>3 配置密钥</h1><p>在本地创建ssh key并填写到Github网站，实现本地git与Github的认证连接。</p>
+<ul>
+<li><p>执行以下命令。邮箱为注册Github的邮箱，注意输入对应密码，其他选项可默认。</p>
+<blockquote>
 <p><em>ssh-keygen -t rsa -C “<a href="mailto:your_email@youremail.com" target="_blank" rel="noopener">your_email@youremail.com</a>“</em></p>
 </blockquote>
-<h2 id="2-在c-user-用户名-ssh这个文件夹下找到id-rsa-pub文件复制密钥内容。"><a href="#2-在c-user-用户名-ssh这个文件夹下找到id-rsa-pub文件复制密钥内容。" class="headerlink" title="2.在c:/user/用户名/.ssh这个文件夹下找到id_rsa.pub文件复制密钥内容。"></a>2.在<strong><em>c:/user/用户名/.ssh</em></strong>这个文件夹下找到<strong><em>id_rsa.pub</em></strong>文件复制密钥内容。</h2><h2 id="3-登录Github，在Setting—SSH-and-GPG-Keys页面下点击New-SSH-Key按钮，取名并粘贴密钥内容，保存。"><a href="#3-登录Github，在Setting—SSH-and-GPG-Keys页面下点击New-SSH-Key按钮，取名并粘贴密钥内容，保存。" class="headerlink" title="3.登录Github，在Setting—SSH and GPG Keys页面下点击New SSH Key按钮，取名并粘贴密钥内容，保存。"></a>3.登录Github，在Setting—SSH and GPG Keys页面下点击New SSH Key按钮，取名并粘贴密钥内容，保存。</h2><h2 id="4-执行命令，绑定用户信息"><a href="#4-执行命令，绑定用户信息" class="headerlink" title="4.执行命令，绑定用户信息."></a>4.执行命令，绑定用户信息.</h2><blockquote>
+</li>
+<li><p>在<strong><em>c:/user/用户名/.ssh</em></strong>这个文件夹下找到<strong><em>id_rsa.pub</em></strong>文件复制密钥内容。</p>
+</li>
+<li><p>登录Github，在Setting—SSH and GPG Keys页面下点击New SSH Key按钮，取名并粘贴密钥内容，保存。</p>
+</li>
+<li><p>执行命令，绑定用户信息.</p>
+<blockquote>
 <p><em>ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a></em><br><em>git config –global user.name “github-username”</em><br><em>git config –global user.email “you-email”</em></p>
 </blockquote>
-<h1 id="四、测试Git与Github连接"><a href="#四、测试Git与Github连接" class="headerlink" title="四、测试Git与Github连接"></a>四、测试Git与Github连接</h1><p>依次执行命令：</p>
-<h2 id="1-定位D盘根目录"><a href="#1-定位D盘根目录" class="headerlink" title="1.定位D盘根目录"></a>1.定位D盘根目录</h2><blockquote>
+</li>
+</ul>
+<h1 id="4-测试Git与Github连接"><a href="#4-测试Git与Github连接" class="headerlink" title="4 测试Git与Github连接"></a>4 测试Git与Github连接</h1><p>依次执行命令：</p>
+<ul>
+<li><p>定位D盘根目录</p>
+<blockquote>
 <p><em>cd  /D</em></p>
 </blockquote>
-<h2 id="2-创建文件夹"><a href="#2-创建文件夹" class="headerlink" title="2.创建文件夹"></a>2.创建文件夹</h2><blockquote>
+</li>
+<li><p>创建文件夹</p>
+<blockquote>
 <p><em>mkdir testProject</em><br><em>cd testProject</em></p>
 </blockquote>
-<h2 id="3-克隆代码库，增加代码并提交"><a href="#3-克隆代码库，增加代码并提交" class="headerlink" title="3.克隆代码库，增加代码并提交"></a>3.克隆代码库，增加代码并提交</h2><blockquote>
+</li>
+<li><p>克隆代码库，增加代码并提交</p>
+<blockquote>
 <p><em>git clone <a href="https://github.com/username/test.git" target="_blank" rel="noopener">https://github.com/username/test.git</a></em><br><em>cd test</em><br><em>echo “No Content” &gt; test.cpp</em><br><em>git add test.cpp</em><br><em>git commit -m “test commit”</em><br><em>git push origin master</em></p>
 </blockquote>
-<p>4.提交完毕后，打开Github网站，查看Test项目是否增加代码文件test.cpp</p>
+</li>
+<li><p>提交完毕后，打开Github网站，查看Test项目是否增加代码文件test.cpp</p>
+</li>
+</ul>
 
       
 
@@ -369,7 +388,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#一、注册Github"><span class="toc-number">1.</span> <span class="toc-text">一、注册Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#二、安装Git"><span class="toc-number">2.</span> <span class="toc-text">二、安装Git</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三、配置密钥"><span class="toc-number">3.</span> <span class="toc-text">三、配置密钥</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-执行以下命令。邮箱为注册Github的邮箱，注意输入对应密码，其他选项可默认。"><span class="toc-number">3.1.</span> <span class="toc-text">1.执行以下命令。邮箱为注册Github的邮箱，注意输入对应密码，其他选项可默认。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-在c-user-用户名-ssh这个文件夹下找到id-rsa-pub文件复制密钥内容。"><span class="toc-number">3.2.</span> <span class="toc-text">2.在c:/user/用户名/.ssh这个文件夹下找到id_rsa.pub文件复制密钥内容。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-登录Github，在Setting—SSH-and-GPG-Keys页面下点击New-SSH-Key按钮，取名并粘贴密钥内容，保存。"><span class="toc-number">3.3.</span> <span class="toc-text">3.登录Github，在Setting—SSH and GPG Keys页面下点击New SSH Key按钮，取名并粘贴密钥内容，保存。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-执行命令，绑定用户信息"><span class="toc-number">3.4.</span> <span class="toc-text">4.执行命令，绑定用户信息.</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四、测试Git与Github连接"><span class="toc-number">4.</span> <span class="toc-text">四、测试Git与Github连接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-定位D盘根目录"><span class="toc-number">4.1.</span> <span class="toc-text">1.定位D盘根目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-创建文件夹"><span class="toc-number">4.2.</span> <span class="toc-text">2.创建文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-克隆代码库，增加代码并提交"><span class="toc-number">4.3.</span> <span class="toc-text">3.克隆代码库，增加代码并提交</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-注册Github"><span class="toc-number">1.</span> <span class="toc-text">1 注册Github</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-安装Git"><span class="toc-number">2.</span> <span class="toc-text">2 安装Git</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-配置密钥"><span class="toc-number">3.</span> <span class="toc-text">3 配置密钥</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-测试Git与Github连接"><span class="toc-number">4.</span> <span class="toc-text">4 测试Git与Github连接</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -502,6 +521,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Cesium</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">premake5</a>
               </li>
              
@@ -515,6 +542,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Regsvr32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,19 +573,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cesium</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Regsvr32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -579,10 +602,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
