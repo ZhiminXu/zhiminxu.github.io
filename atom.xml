@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>北辰之远</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-12-17T23:44:23.321Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>北辰之远</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>angular与cesium集成开发</title>
+    <link href="http://yoursite.com/2020/12/17/angular%E4%B8%8Ecesium%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/"/>
+    <id>http://yoursite.com/2020/12/17/angular%E4%B8%8Ecesium%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/</id>
+    <published>2020-12-17T06:27:03.000Z</published>
+    <updated>2020-12-17T23:44:23.321Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-angular相关"><a href="#1-angular相关" class="headerlink" title="1 angular相关"></a>1 angular相关</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ng new ngArkWeb</span><br><span class="line">cd ngArkWeb</span><br><span class="line">ng add ng-zorro-antd</span><br></pre></td></tr></table></figure><a id="more"></a><h1 id="2-Cesium相关"><a href="#2-Cesium相关" class="headerlink" title="2 Cesium相关"></a>2 Cesium相关</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i cesium</span><br><span class="line">npm i @angular-builders&#x2F;custom-webpack --save-dev</span><br></pre></td></tr></table></figure><p>angular工程根目录创建配置文件extra-webpack.config.js</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  node: &#123;</span><br><span class="line">    fs: "empty",</span><br><span class="line">    Buffer: false,</span><br><span class="line">    http: "empty",</span><br><span class="line">    https: "empty",</span><br><span class="line">    zlib: "empty"</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    unknownContextCritical: false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h1 id="3-修改工程配置"><a href="#3-修改工程配置" class="headerlink" title="3 修改工程配置"></a>3 修改工程配置</h1><p>修改angular.json文件，在”src/assets”后面添加以下配置：</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"glob"</span>: <span class="string">"**/*"</span>,</span><br><span class="line"><span class="attr">"input"</span>: <span class="string">"node_modules/cesium/Build/Cesium"</span>,</span><br><span class="line"><span class="attr">"output"</span>: <span class="string">"/assets/cesium"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在”src/styles.css”后面添加以下配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;src&#x2F;assets&#x2F;ThirdParty&#x2F;CesiumNavigation&#x2F;cesium-navigation.css&quot;,</span><br><span class="line">&quot;node_modules&#x2F;cesium&#x2F;Build&#x2F;Cesium&#x2F;Widgets&#x2F;widgets.css&quot;,</span><br></pre></td></tr></table></figure><p>在scripts:[]方括号中添加以下配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;node_modules&#x2F;cesium&#x2F;Build&#x2F;Cesium&#x2F;Cesium.js&quot;,</span><br><span class="line">&quot;src&#x2F;assets&#x2F;ThirdParty&#x2F;CesiumNavigation&#x2F;CesiumNavigation.umd.js&quot;,</span><br><span class="line">&quot;src&#x2F;assets&#x2F;ThirdParty&#x2F;Other&#x2F;DOM&#x2F;dom-to-image.min.js&quot;,</span><br><span class="line">&quot;src&#x2F;assets&#x2F;ArkWeb.js&quot;</span><br></pre></td></tr></table></figure><p>在scripts:[]后添加以下配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;customWebpackConfig&quot;: &#123;</span><br><span class="line">    &quot;path&quot;: &quot;.&#x2F;extra-webpack.config.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在tsconfig.js文件的  “angularCompilerOptions” 选项中添加以下配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;enableIvy&quot;: false,</span><br></pre></td></tr></table></figure><p>在serve 与 build选项组中，修改builder属性，从 angular-devkit/build-angular 修改为 angular-builders/custom-webpack</p><h1 id="4-修改代码"><a href="#4-修改代码" class="headerlink" title="4 修改代码"></a>4 修改代码</h1><p>在main.ts中添加以下代码：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>[<span class="string">'CESIUM_BASE_URL'</span>] = <span class="string">'/assets/cesium/'</span>;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      angular前端框架与cesium引擎集成开发框架搭建
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Cesium" scheme="http://yoursite.com/tags/Cesium/"/>
+    
+      <category term="Angular" scheme="http://yoursite.com/tags/Angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OpenThreads三个线程顺序打印ABC</title>
+    <link href="http://yoursite.com/2020/11/27/OpenThreads%E4%B8%89%E4%B8%AA%E7%BA%BF%E7%A8%8B%E9%A1%BA%E5%BA%8F%E6%89%93%E5%8D%B0ABC/"/>
+    <id>http://yoursite.com/2020/11/27/OpenThreads%E4%B8%89%E4%B8%AA%E7%BA%BF%E7%A8%8B%E9%A1%BA%E5%BA%8F%E6%89%93%E5%8D%B0ABC/</id>
+    <published>2020-11-27T15:52:39.000Z</published>
+    <updated>2020-11-27T16:05:48.088Z</updated>
+    
+    <content type="html"><![CDATA[<p>实现思路如下：</p><ul><li>实现三个线程的run方法，分别循环打印ABC</li><li>设计一个全局变量，当变量为1时，才让A线程打印A，打印完将全局变量改为2；当变量为2时，才让B线程打印B，打印完将全局变量改为3；当变量为3时，才让C线程打印C，打印完将全局变量改为1。</li><li>通过区域锁，保证线程安全的读写该全局变量。</li></ul><a id="more"></a><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;OpenThreads/Thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;OpenThreads/ScopedLock&gt;</span></span></span><br><span class="line"> </span><br><span class="line">OpenThreads::Mutex g_mutex;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">g_flag</span><span class="params">(<span class="number">1</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrintAThread</span> :</span> <span class="keyword">public</span> OpenThreads::Thread</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; <span class="number">10</span>; )</span><br><span class="line">&#123;</span><br><span class="line">OpenThreads::ScopedLock&lt;OpenThreads::Mutex&gt; scopedlock(g_mutex);</span><br><span class="line">                        <span class="comment">//g_flag初始化为1，让A先打印</span></span><br><span class="line"><span class="keyword">if</span> (g_flag == <span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">                                <span class="comment">//打印之后设置为2，让B打印</span></span><br><span class="line">g_flag = <span class="number">2</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"A"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">n++;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrintBThread</span> :</span> <span class="keyword">public</span> OpenThreads::Thread</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; <span class="number">10</span>; )</span><br><span class="line">&#123;</span><br><span class="line">OpenThreads::ScopedLock&lt;OpenThreads::Mutex&gt; scopedlock(g_mutex);</span><br><span class="line">                        <span class="comment">//g_flag为2时才让B打印</span></span><br><span class="line"><span class="keyword">if</span> (g_flag == <span class="number">2</span>)</span><br><span class="line">&#123;</span><br><span class="line">                                <span class="comment">//打印之后设置为3，让C打印</span></span><br><span class="line">g_flag = <span class="number">3</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"B"</span> &lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">n++;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrintCThread</span> :</span> <span class="keyword">public</span> OpenThreads::Thread</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; <span class="number">10</span>; )</span><br><span class="line">&#123;</span><br><span class="line">OpenThreads::ScopedLock&lt;OpenThreads::Mutex&gt; scopedlock(g_mutex);</span><br><span class="line">                        <span class="comment">//g_flag为3时才让C打印</span></span><br><span class="line"><span class="keyword">if</span> (g_flag == <span class="number">3</span>)</span><br><span class="line">&#123;</span><br><span class="line">                                <span class="comment">//打印之后设置为1，让A打印</span></span><br><span class="line">g_flag = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"C"</span> &lt;&lt;<span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">n++;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> _tmain(<span class="keyword">int</span> argc, _TCHAR* argv[])</span><br><span class="line">&#123;</span><br><span class="line">PrintAThread threadA;</span><br><span class="line">PrintBThread threadB; </span><br><span class="line">PrintCThread threadC;</span><br><span class="line">threadA.start();</span><br><span class="line">threadB.start();</span><br><span class="line">threadC.start();</span><br><span class="line"> </span><br><span class="line"><span class="comment">//等待线程完成善后工作</span></span><br><span class="line"><span class="keyword">while</span>(threadA.isRunning())</span><br><span class="line">OpenThreads::Thread::YieldCurrentThread();</span><br><span class="line"><span class="keyword">while</span>(threadB.isRunning())</span><br><span class="line">OpenThreads::Thread::YieldCurrentThread();</span><br><span class="line"><span class="keyword">while</span>(threadC.isRunning())</span><br><span class="line">OpenThreads::Thread::YieldCurrentThread();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      介绍了基于OpenThreads多线程库实现三个线程顺序打印ABC字母的实现方式。
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="OpenThreads" scheme="http://yoursite.com/tags/OpenThreads/"/>
+    
+      <category term="OSG" scheme="http://yoursite.com/tags/OSG/"/>
+    
+      <category term="多线程" scheme="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>premake5实例教程</title>
+    <link href="http://yoursite.com/2020/09/13/premake5%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/"/>
+    <id>http://yoursite.com/2020/09/13/premake5%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/</id>
+    <published>2020-09-13T09:11:47.000Z</published>
+    <updated>2020-09-13T10:13:40.142Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h1><p>本文讲解如何基于premake5创建一个典型的C++解决方案，该解决方案包含三个项目：</p><ul><li>一个依赖GLFW动态库的动态库项目ExampleDll</li><li>一个依赖ExampleDll动态库的窗口程序APP</li><li>一个基于Catch的单元测试程序UnitTest</li></ul><a id="more"></a><p>所有代码已上传Github，<a href="https://github.com/ZhiminXu/premakeExample" target="_blank" rel="noopener">链接</a>。</p><h1 id="2-你需要准备"><a href="#2-你需要准备" class="headerlink" title="2 你需要准备"></a>2 你需要准备</h1><ul><li>premake5.exe程序</li><li>一个文本编辑器</li><li>一个支持C++11的编译器，因为源代码使用了C++11特性</li><li>一个支持OpenGL 1.1的显卡</li></ul><h1 id="3-文件的组织结构"><a href="#3-文件的组织结构" class="headerlink" title="3 文件的组织结构"></a>3 文件的组织结构</h1><p>首先需要确定整个解决方案中源代码、三方库、二进制等文件的组织结构，本文创建的文件结构如下：</p><blockquote><p>premakeExample/<br>&emsp;|–premake5.lua （premake脚本文件）<br>&emsp;|–prj/ (生成的解决方案与各项目配置文件路径)<br>&emsp;|–build/<br>&emsp;|&emsp;|–target/ (目标生成路径)<br>&emsp;|&emsp;|–obj/ （中间文件生成路径）<br>&emsp;|–bin/ (最终发布的二进制文件路径)<br>&emsp;|–3rd/ (第三方库文件路径)<br>&emsp;|&emsp;|–Catch (Catch单元测试框架头文件路径)<br>&emsp;|&emsp;|–glfw （glfw三方库相关文件路径） </p></blockquote><h1 id="4-下载所需文件"><a href="#4-下载所需文件" class="headerlink" title="4 下载所需文件"></a>4 下载所需文件</h1><ul><li>premake5.exe <a href="https://github.com/premake/premake-core/releases" target="_blank" rel="noopener" title="premake5.exe下载链接">下载</a></li><li>glfw三方库 <a href="https://www.glfw.org/download.html" target="_blank" rel="noopener" title="glfw下载路径">下载</a></li></ul><blockquote><p>本文以64位系统为例，需下载64位二进制库，也可以下载32位，但要记得在后面lua脚本中改变architecture配置。</p></blockquote><blockquote><p>将下载解压后的include和<code>lib-vc*</code>文件夹放在premakeExample/3rd/glfw文件夹下，<code>*</code>指代不同的vs版本，需与后续生成配置文件的vs版本一致。</p></blockquote><blockquote><p>将lib-vc*路径下的glfw3.dll拷贝纸premakeExample/bin路径下</p></blockquote><ul><li>catch是一个只有头文件的依赖库，将Catch.hpp(<a href="https://raw.githubusercontent.com/catchorg/Catch2/master/single_include/catch2/catch.hpp" target="_blank" rel="noopener" title="catch.hpp下载路径">下载</a>)放在premakeExample/3rd/Catch/include路径下即可。</li></ul><h1 id="5-添加代码"><a href="#5-添加代码" class="headerlink" title="5 添加代码"></a>5 添加代码</h1><h2 id="5-1-ExampleDll"><a href="#5-1-ExampleDll" class="headerlink" title="5.1 ExampleDll"></a>5.1 ExampleDll</h2><p>ExampleDll库只是对glfw中的GLFWwindow进行了简单封装，隐藏了window的内部实现细节。Window类通过<code>_declspec(dllexport)</code>导出。</p><ul><li><p>ExampleDll.hpp代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> EXAMPLE_DLL_HPP</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXAMPLE_DLL_HPP 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GLFWwindow</span>;</span></span><br><span class="line"><span class="keyword">namespace</span> ExDLL</span><br><span class="line">&#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> _<span class="title">declspec</span>(<span class="title">dllexport</span>) <span class="title">Window</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">Window(<span class="keyword">int</span> width, <span class="keyword">int</span>  height, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; title);</span><br><span class="line">~Window();</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">shouldClose</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pollEvents</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swapBuffers</span><span class="params">()</span> <span class="keyword">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; getWindowSize() <span class="keyword">const</span> <span class="keyword">noexcept</span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">GLFWwindow* wnd;</span><br><span class="line">&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></li><li><p>ExampleDll.cpp代码如下</p></li></ul><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ExampleDll.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> ExDLL</span><br><span class="line">&#123;</span><br><span class="line">Window::Window(<span class="keyword">int</span> width, <span class="keyword">int</span> height, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; title)</span><br><span class="line">&#123;</span><br><span class="line">glfwInit();</span><br><span class="line">wnd = glfwCreateWindow(width, height, title.c_str(), <span class="literal">nullptr</span>, <span class="literal">nullptr</span>);</span><br><span class="line">glfwMakeContextCurrent(wnd);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Window::~Window()</span><br><span class="line">&#123;</span><br><span class="line">glfwDestroyWindow(wnd);</span><br><span class="line">glfwTerminate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> Window::shouldClose() <span class="keyword">const</span> <span class="keyword">noexcept</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">return</span> glfwWindowShouldClose(wnd) != <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Window::pollEvents() <span class="keyword">const</span> <span class="keyword">noexcept</span></span><br><span class="line">&#123;</span><br><span class="line">glfwPollEvents();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Window::swapBuffers() <span class="keyword">const</span> <span class="keyword">noexcept</span></span><br><span class="line">&#123;</span><br><span class="line">glfwSwapBuffers(wnd);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; Window::getWindowSize() <span class="keyword">const</span> <span class="keyword">noexcept</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">std</span>::pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; sz&#123;&#125;;</span><br><span class="line">glfwGetWindowSize(wnd, &amp;sz.first, &amp;sz.second);</span><br><span class="line"><span class="keyword">return</span> sz;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="5-2-App"><a href="#5-2-App" class="headerlink" title="5.2 App"></a>5.2 App</h2><p>应用程序依赖Exampledll，创建一个窗口应用程序，并运用固定管线绘制一个红色的三角形。当然本教程不讲解OpenGL，如果想要学习OpenGL的使用，应该学习更先进的可编程管线。</p><ul><li>main.cpp代码如下：</li></ul><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ExampleDll.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> defined _WIN32</span></span><br><span class="line">    <span class="comment">//Windows平台使用OpenGL需要包含Windows.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="comment">//消除窗口程序的控制台界面</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(linker,<span class="meta-string">"/subsystem:\"windows\" /entry:\"mainCRTStartup\""</span>)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;gl/GL.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//导入ExampleDll中的Window类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> _<span class="title">declspec</span>(<span class="title">dllimport</span>) <span class="title">ExDLL</span>:</span>:Window;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">ExDLL::Window window&#123; <span class="number">800</span>, <span class="number">600</span>, <span class="string">"Hello World!"</span> &#125;;</span><br><span class="line"><span class="keyword">while</span> (!window.shouldClose())</span><br><span class="line">&#123;</span><br><span class="line">window.pollEvents();</span><br><span class="line"><span class="comment">//为简单起见，使用了古老的固定管线</span></span><br><span class="line">glColor3f(<span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>);</span><br><span class="line">glBegin(GL_TRIANGLES);</span><br><span class="line">glVertex2f(<span class="number">-0.5f</span>, <span class="number">-0.5f</span>);</span><br><span class="line">glVertex2f(<span class="number">0.5f</span>, <span class="number">-0.5f</span>);</span><br><span class="line">glVertex2f(<span class="number">0</span>, <span class="number">0.5f</span>);</span><br><span class="line">glEnd();</span><br><span class="line">window.swapBuffers();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="5-3-UnitTest"><a href="#5-3-UnitTest" class="headerlink" title="5.3 UnitTest"></a>5.3 UnitTest</h2><p>单元测试程序检查创建的窗口大小是否与参数要求的大小一致。</p><ul><li>Test.cpp代码如下：</li></ul><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CATCH_CONFIG_MAIN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Catch.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ExampleDll.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line">TEST_CASE(<span class="string">"Window tests"</span>, <span class="string">"[ExampleDll]"</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> ExDLL;</span><br><span class="line">Window w&#123; <span class="number">600</span>, <span class="number">400</span>, <span class="string">"Test Window"</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> size = w.getWindowSize();</span><br><span class="line"></span><br><span class="line">REQUIRE(size.first == <span class="number">600</span>);</span><br><span class="line">REQUIRE(size.second == <span class="number">400</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="6-编写premake5-lua脚本文件"><a href="#6-编写premake5-lua脚本文件" class="headerlink" title="6 编写premake5.lua脚本文件"></a>6 编写premake5.lua脚本文件</h1><p>premake5.lua是生成工程配置文件的核心。</p><ul><li>premake5.lua代码如下：</li></ul><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 最终解决方案的名称</span></span><br><span class="line">workspace <span class="string">"premakeExample"</span></span><br><span class="line"><span class="comment">-- 解决方案与各项目配置文件生成路径</span></span><br><span class="line">location <span class="string">"prj"</span></span><br><span class="line"><span class="comment">-- 指定语言</span></span><br><span class="line">language <span class="string">"C++"</span></span><br><span class="line"><span class="comment">-- 指定架构 x64 或 x86 或  x86_64</span></span><br><span class="line">architecture <span class="string">"x64"</span></span><br><span class="line"><span class="comment">-- 配置类型</span></span><br><span class="line">configurations &#123;<span class="string">"Debug"</span>,<span class="string">"Release"</span>&#125;</span><br><span class="line"><span class="comment">-- 针对Debug配置类型的参数设置</span></span><br><span class="line">filter &#123;<span class="string">"configurations:Debug"</span>&#125;</span><br><span class="line">symbols <span class="string">"On"</span></span><br><span class="line"><span class="comment">-- 针对Release配置类型的参数设置</span></span><br><span class="line">filter &#123;<span class="string">"configurations:Release"</span>&#125;</span><br><span class="line">optimize <span class="string">"On"</span></span><br><span class="line"><span class="comment">-- 重置过滤器的其他设定</span></span><br><span class="line">filter &#123;&#125;</span><br><span class="line"><span class="comment">-- 目标文件生成路径 如%&#123;prj.name&#125;为内置的宏，指项目的名称，如后面的ExampleDll，App等</span></span><br><span class="line">targetdir (<span class="string">"build/target/%&#123;prj.name&#125;/%&#123;cfg.longname&#125;"</span>)</span><br><span class="line"><span class="comment">-- 中间文件生成路径</span></span><br><span class="line">objdir (<span class="string">"build/obj/%&#123;prj.name&#125;/%&#123;cfg.longname&#125;"</span>)</span><br><span class="line"><span class="comment">-- 编译后命令行，将目标文件拷贝至bin文件夹，注意../bin/是prj文件夹的相对路径</span></span><br><span class="line">postbuildcommands&#123;</span><br><span class="line">(<span class="string">"&#123;COPY&#125; %&#123;cfg.buildtarget.relpath&#125; \"../bin/\""</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数，包含glfw三方库头文件，可被其他工程调用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">includeGLFW</span><span class="params">()</span></span></span><br><span class="line">includedirs <span class="string">"3rd/glfw/include"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">-- 定义函数，链接glfw三方库</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">linkGLFW</span><span class="params">()</span></span></span><br><span class="line"><span class="comment">-- 指定lib的文件路径</span></span><br><span class="line">libdirs <span class="string">"3rd/glfw/lib-vc2019"</span></span><br><span class="line"><span class="comment">-- 指定lib文件名，即glfw3dll.lib，此处使用的是动态库</span></span><br><span class="line">links <span class="string">"glfw3dll"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- ExampleDll项目</span></span><br><span class="line">project <span class="string">"ExampleDll"</span></span><br><span class="line"><span class="comment">-- 类型为动态库项目</span></span><br><span class="line">kind <span class="string">"SharedLib"</span></span><br><span class="line"><span class="comment">-- 代码文件，即ExampleDll文件夹下的所有文件</span></span><br><span class="line">files <span class="string">"src/ExampleDll/**"</span></span><br><span class="line"><span class="comment">-- 包含glfw头文件</span></span><br><span class="line">includeGLFW()</span><br><span class="line"><span class="comment">-- 链接glfw三方库</span></span><br><span class="line">linkGLFW()</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数，链接ExampleDll动态库</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useExampleDLL</span><span class="params">()</span></span></span><br><span class="line">includedirs <span class="string">"src/ExampleDll"</span></span><br><span class="line">links <span class="string">"ExampleDll"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- App应用程序</span></span><br><span class="line">project <span class="string">"App"</span></span><br><span class="line"><span class="comment">-- 类型为控制台程序</span></span><br><span class="line">kind <span class="string">"ConsoleApp"</span></span><br><span class="line"><span class="comment">-- 代码文件</span></span><br><span class="line">files <span class="string">"src/App/**"</span></span><br><span class="line"><span class="comment">-- 链接ExampleDll动态库</span></span><br><span class="line">useExampleDLL()</span><br><span class="line"><span class="comment">-- windows平台使用OpenGL需链接OpenGL32</span></span><br><span class="line">filter <span class="string">"system:windows"</span></span><br><span class="line">links &#123;<span class="string">"OpenGL32"</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 定义函数，包含Catch</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">includeCatch</span><span class="params">()</span></span></span><br><span class="line">includedirs <span class="string">"3rd/Catch/Include"</span></span><br><span class="line"><span class="comment">-- 预定义宏，C++版本为C++11及以上</span></span><br><span class="line">defines <span class="string">"CATCH_CPP11_OR_GREATER"</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- UnitTests单元测试项目</span></span><br><span class="line">project <span class="string">"UnitTests"</span></span><br><span class="line"><span class="comment">-- 类型为控制台程序</span></span><br><span class="line">kind <span class="string">"ConsoleApp"</span></span><br><span class="line"><span class="comment">-- 代码文件</span></span><br><span class="line">files <span class="string">"src/UnitTests/**"</span></span><br><span class="line"><span class="comment">-- 包含Catch</span></span><br><span class="line">includeCatch()</span><br><span class="line"><span class="comment">-- 链接ExamleDll</span></span><br><span class="line">useExampleDLL()</span><br></pre></td></tr></table></figure><h1 id="7-生成工程文件并编译"><a href="#7-生成工程文件并编译" class="headerlink" title="7 生成工程文件并编译"></a>7 生成工程文件并编译</h1><p>premake5.exe运行时时会寻找调用命令路径下的premake5.lua文件，如果想生成工程配置文件，需在premakeExample路径下调用<code>premake5.exe &lt;action&gt;</code>，其中<code>action</code>可指定为<code>vs2019</code>或<code>gmake</code>，本文以vs2019为例。<br><img src="/2020/09/13/premake5%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/generate.jpg" alt="在这里插入图片描述"><br>执行命令后在prj文件夹下，生成的工程配置文件如下：<br><img src="/2020/09/13/premake5%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/proj.jpg" alt="在这里插入图片描述"><br>打开premakeExample.sln编译解决方案，在bin路径下运行app.exe，效果如下：<br><img src="/2020/09/13/premake5%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/result.jpg" alt="在这里插入图片描述"><br>命令行打开单元测试程序UnitTests.exe,效果如下：<br><img src="/2020/09/13/premake5%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B/test.jpg" alt="在这里插入图片描述"></p>]]></content>
+    
+    <summary type="html">
+    
+      介绍了premake5的使用教程，基于测试驱动开发理念搭建了一个基本的OpenGL三维程序框架
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+      <category term="premake5" scheme="http://yoursite.com/tags/premake5/"/>
+    
+      <category term="unit test" scheme="http://yoursite.com/tags/unit-test/"/>
+    
+      <category term="OpenGL" scheme="http://yoursite.com/tags/OpenGL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AwesomeCesium-Cesium开发资源</title>
+    <link href="http://yoursite.com/2020/08/29/Cesium-%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/"/>
+    <id>http://yoursite.com/2020/08/29/Cesium-%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/</id>
+    <published>2020-08-29T06:27:15.000Z</published>
+    <updated>2020-09-13T10:14:21.064Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="AwesomeCesium"><a href="#AwesomeCesium" class="headerlink" title="AwesomeCesium"></a>AwesomeCesium</h1><p>Awesome lists about all kinds of cesium related resources. 本项目列出了与Cesium相关的各种资源。</p><h2 id="1-Data-Processing-数据处理"><a href="#1-Data-Processing-数据处理" class="headerlink" title="1 Data Processing 数据处理"></a>1 Data Processing 数据处理</h2><h3 id="1-1-Terrain-Building-地形生产"><a href="#1-1-Terrain-Building-地形生产" class="headerlink" title="1.1 Terrain Building 地形生产"></a>1.1 Terrain Building 地形生产</h3><ul><li><a href="https://github.com/geo-data/cesium-terrain-builder" target="_blank" rel="noopener">cesium-terrain-builder</a>. A C++ library and associated command line tools designed to create terrain tiles for use in the Cesium JavaScript library. 基于C++的Cesium地形瓦片创建工具库及相关命令行工具。<a id="more"></a></li><li><a href="https://github.com/ahuarte47/cesium-terrain-builder/tree/master-quantized-mesh" target="_blank" rel="noopener">ctb-quantized-mesh</a>. A branch of cesium-terrain-builder to generate quantized-mesh format cesium terrain tiles. The quantized-mesh format follows the same tile structure as heightmap tiles, but each tile is better optimised for large-scale terrain rendering. CTB的一个分支，支持离散网格（不规则三角网）格式地形瓦片的生成。离散网格地形瓦片与高度图（规则格网）地形瓦片的文件结构相同，但是对于大范围地形渲染具有更高的效率。</li><li><a href="https://github.com/giohappy/gdal2cesium" target="_blank" rel="noopener">gdal2cesium</a>. A Python command line utility, based on GDAL and inspired by gdal2tiles, to generate terrain heightmap tiles accordig to the native Cesium format. 基于GDAL的Python命令行工具，可以生产高度图格式的Cesium地形数据。</li><li><a href="https://github.com/geo-data/cesium-terrain-server" target="_blank" rel="noopener">Cesium Terrain Server</a>.A basic server for serving up filesystem based tilesets representing Cesium.js terrain models. The resources served up are intended for use with the CesiumTerrainProvider JavaScript class present in the Cesium.js client. 一个可以将Cesium地形瓦片进行文件发布的服务端程序。瓦片发布后，在客户端中可通过CesiumTerrainProvider进行接入使用。</li><li><a href="https://github.com/TNOCS/mbtiles-terrain-server" target="_blank" rel="noopener">mbtiles-terrain-server</a>. A mbtiles service that can import millions of small cesium terrain tiles into only a mbtiles (sqlite3) database file and serve them via http. 一个mbtiles服务发布程序，可以将成千上万的Cesium地形瓦片数据导入到一个sqlite数据库文件，并通过http进行发布。</li></ul><h3 id="1-2-3D-Model-Converting-三维模型转换"><a href="#1-2-3D-Model-Converting-三维模型转换" class="headerlink" title="1.2 3D Model Converting 三维模型转换"></a>1.2 3D Model Converting 三维模型转换</h3><ul><li><a href="https://github.com/fanvanzh/3dtiles" target="_blank" rel="noopener">3dtiles</a>. The so-called fastest tools for 3dtiles converting tool in the world, including osgb-to-3dtiles, shapefile-to-3dtiles and fbx-to-3dtiles converting. 号称世界上最快的 3dtiles 转换工具，支持倾斜摄影数据、shapefile 数据转3dtiles，支持 osg、osgb、obj、fbx、3ds、b3dm等单一通用模型数据转为 gltf、glb 格式。</li><li><a href="https://github.com/KhronosGroup/COLLADA2GLTF" target="_blank" rel="noopener">COLLADA2GLTF</a>. A command-line tool to convert COLLADA (.dae) files to glTF supporting Windows, MacOS, and Linux. 一个将COLLADA（.dae格式）模型转换为gltf格式的命令行工具，支持Windows、MacOS和Linux。</li><li><a href="https://github.com/nxddsnc/gltf-to-3dtiles" target="_blank" rel="noopener">gltf-to-3dtiles</a>. A command line tool to convert gltf(glb) file to 3d tiles format.一个将gltf或glb格式转化为3dtiles的命令行工具。</li><li><a href="https://github.com/CesiumGS/obj2gltf" target="_blank" rel="noopener">obj2gltf</a>.  Node command line tool to convert OBJ assets to glTF 2.0. 将obj格式文件转换为gltf 2.0格式的Node命令行工具。</li><li><a href="https://github.com/PrincessGod/objTo3d-tiles" target="_blank" rel="noopener">objTo3d-tiles</a>. Node command line tool and module convert obj model file to 3D Tiles, based on <a href="https://github.com/CesiumGS/obj2gltf" target="_blank" rel="noopener">obj2gltf</a>. 基于<a href="https://github.com/CesiumGS/obj2gltf" target="_blank" rel="noopener">obj2gltf</a>, 将obj模型文件转换为3dtiles格式的Node命令行工具</li><li><a href="https://github.com/njam/citygml-to-3dtiles" target="_blank" rel="noopener">citygml-to-3dtiles</a>. A very basic and experimental converter from CityGML to Cesium 3D Tiles. 一个将CityGML格式转化为3dtiles的<strong>基础实验性</strong>命令行工具。</li><li><a href="https://github.com/mattshax/cesium_pnt_generator" target="_blank" rel="noopener">cesium_pnt_generator</a>. Convert lidar las datasets into Cesium pnts 3d-tiles. 将las点云数据集转换为3dtiles格式。</li></ul><h2 id="2-Front-end-Framework-Integration-前端框架集成"><a href="#2-Front-end-Framework-Integration-前端框架集成" class="headerlink" title="2 Front-end Framework Integration 前端框架集成"></a>2 Front-end Framework Integration 前端框架集成</h2><h3 id="2-1-Angular"><a href="#2-1-Angular" class="headerlink" title="2.1 Angular"></a>2.1 Angular</h3><ul><li><a href="https://github.com/Developer-Plexscape/cesium-angular-example" target="_blank" rel="noopener">cesium-angular-example</a>. A simple web application that demonstrates integration of Cesium with the LATEST version of Angular. 一个简单的web应用程序，演示了Cesium与最新版的Angular的集成。</li><li><a href="https://github.com/articodeltd/angular-cesium" target="_blank" rel="noopener">angular-cesium</a>. JavaScript library for creating map based web apps using Cesium and Angular, which is an angular wrapper for cesium.js. 使用Cesium与Angular创建地图Web应用的JavaScript库，基于Angular对cesium.js进行了封装。</li></ul><h3 id="2-2-Vue"><a href="#2-2-Vue" class="headerlink" title="2.2 Vue"></a>2.2 Vue</h3><ul><li><a href="https://github.com/ShareQiu1994/cesium-vue" target="_blank" rel="noopener">cesium-vue</a>. Cesium development template based on vueCli 4.x.x +. 基于vueCli 4.x.x + 的cesium开发模板.</li><li><a href="https://github.com/zouyaoji/vue-cesium" target="_blank" rel="noopener">vue-cesium</a>. Vue 2.x components for CesiumJS. Load Cesium built package or other third-party packages which are built on Cesium. 基于 Vue2.x的 Cesium 三维地图组件,</li></ul><h3 id="2-3-React"><a href="#2-3-React" class="headerlink" title="2.3 React"></a>2.3 React</h3><ul><li><a href="https://github.com/darwin-education/resium" target="_blank" rel="noopener">resium</a>. React components for Cesium. 基于React封装的Cesium组件库。</li><li><a href="https://github.com/NichijouCC/cesium_demos" target="_blank" rel="noopener">cesium_demos</a>. Demo applications based on cesium, react and typescript. 使用cesium+react+ts编写的cesium使用样例程序库。</li></ul><h2 id="3-Cesium-Extension-Cesium功能扩展"><a href="#3-Cesium-Extension-Cesium功能扩展" class="headerlink" title="3 Cesium Extension Cesium功能扩展"></a>3 Cesium Extension Cesium功能扩展</h2><h3 id="3-1-Provider-数据驱动"><a href="#3-1-Provider-数据驱动" class="headerlink" title="3.1 Provider 数据驱动"></a>3.1 Provider 数据驱动</h3><ul><li><a href="https://github.com/MikesWei/CesiumVectorTile" target="_blank" rel="noopener">CesiumVectorTile</a>. Vector Tile Imagery Provider for Cesium. 实现将geojson、shp等矢量数据动态切片贴地的Cesium驱动。</li><li><a href="https://github.com/xlhomme/WCSTerrainProvider" target="_blank" rel="noopener">WCSTerrainProvider</a>. WCS Terrain Provider for Cesium. 添加WCS地形的Cesium驱动。</li><li><a href="https://github.com/kaktus40/Cesium-GeoserverTerrainProvider" target="_blank" rel="noopener">Cesium-GeoserverTerrainProvider</a>. A terrain provider which works with geoserver providing elevation datas in bil, png, gif and jpeg formats. 将Geoserver作为地形驱动的插件。</li></ul><h3 id="3-2-UI-界面元素"><a href="#3-2-UI-界面元素" class="headerlink" title="3.2 UI 界面元素"></a>3.2 UI 界面元素</h3><ul><li><a href="https://github.com/alberto-acevedo/cesium-navigation" target="_blank" rel="noopener">cesium-navigation</a>. Cesium plugin that adds to the Cesium map a compass, navigator (zoom in/out), and distance scale. 可以给Cesium地图添加罗盘、地图缩放、比例尺等工具条的插件。</li></ul><h3 id="3-3-Data-Visualization-数据展示"><a href="#3-3-Data-Visualization-数据展示" class="headerlink" title="3.3 Data Visualization 数据展示"></a>3.3 Data Visualization 数据展示</h3><ul><li><a href="https://github.com/manuelnas/CesiumHeatmap" target="_blank" rel="noopener">CesiumHeatmap</a>. A library to add heatmaps (using heatmap.js) to the Cesium framework. 使用HeatMap.js 向Cesium地图添加热力图的扩展库。</li><li><a href="https://github.com/RaymanNg/3D-Wind-Field" target="_blank" rel="noopener">3D-Wind-Field</a>. Visualize wind field on Cesium. 基于Cesium实现三维环境下风场数据的可视化。</li><li><a href="https://github.com/abwood/d3cesium" target="_blank" rel="noopener">d3cesium</a>. Demo web app featuring Cesium and d3 libraries. 基于Cesium与D3.js结合的示例程序。</li><li><a href="https://github.com/MikesWei/CesiumMeshVisualizer" target="_blank" rel="noopener">CesiumMeshVisualizer</a>. Make you can use three.js geometry in Cesium,and use mesh,geometry,material like three.js to manage renderable object in Cesium. 可以让你在Cesium中使用three.js对可渲染对象的三角网、几何、材质等信息进行管理。</li><li><a href="https://github.com/openlayers/ol-cesium" target="_blank" rel="noopener">ol-cesium</a>. OpenLayers - Cesium integration library. Create your map using OpenLayers, and visualize it on a globe with Cesium. OpenLayer与Cesium的继承库，可以让你使用OpenLayers创建二维地图并在Cesium中进行可视化。</li><li><a href="https://github.com/NICTA/cesium-vr" target="_blank" rel="noopener">cesium-vr</a>. Plugin for Cesium web-based virtual globe software to support the Oculus VR headset. Cesium的VR插件，支持将web端数字地球接入Oculus头盔中显示。</li></ul><h3 id="3-4-Editor-编辑功能"><a href="#3-4-Editor-编辑功能" class="headerlink" title="3.4 Editor 编辑功能"></a>3.4 Editor 编辑功能</h3><ul><li><a href="https://github.com/leforthomas/cesium-drawhelper" target="_blank" rel="noopener">cesium-drawhelper</a>. A very early stage shape editor for Cesium. Currently limited to 2D and simple shapes. Cesium矢量编辑工具，早期版本，目前仅限于二维与简单矢量的编辑。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      AwesomeCesium开源项目，整理了Cesium开发相关的资源
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Cesium" scheme="http://yoursite.com/tags/Cesium/"/>
+    
+      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vultr搭建SS/SSR服务器</title>
+    <link href="http://yoursite.com/2019/09/18/Vultr%E6%90%AD%E5%BB%BASS-SSR%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://yoursite.com/2019/09/18/Vultr%E6%90%AD%E5%BB%BASS-SSR%E6%9C%8D%E5%8A%A1%E5%99%A8/</id>
+    <published>2019-09-18T07:32:29.000Z</published>
+    <updated>2020-11-28T15:44:33.774Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-注册Vultr"><a href="#1-注册Vultr" class="headerlink" title="1 注册Vultr"></a>1 注册Vultr</h1><p>注册<a href="https://www.vultr.com/" target="_blank" rel="noopener">Vultr</a>账户，验证邮箱，并充值，支持信用卡、Paypal、微信、支付宝甚至比特币。</p><h1 id="2-安装服务器"><a href="#2-安装服务器" class="headerlink" title="2 安装服务器"></a>2 安装服务器</h1><p>选择服务器、地区、操作系统、参数、价格。注意：操作系统选择<code>centos6 x64</code>版本，否则后续无法安装锐速破解版。</p><a id="more"></a><p>安装服务器之后，本地使用<code>ping</code>命令，确认改服务器ip可以<code>ping</code>通，如果<code>ping</code>不通，则要删除该服务器。重新选择地区，重新安装服务器。</p><p>点击服务器列表OS列下方的方块状图标，可查看服务器的各种信息，包括用户名秘密等。</p><h1 id="3-安装ShadowSocksR"><a href="#3-安装ShadowSocksR" class="headerlink" title="3 安装ShadowSocksR"></a>3 安装ShadowSocksR</h1><p>使用View Console打开远程控制台，输入用户名（一般为<code>root</code>）和密码登录。输入以下命令：</p><blockquote><p>wget –no-check-certificate <a href="http://www.vofac.com/download/66R.sh&amp;&amp;bash" target="_blank" rel="noopener">http://www.vofac.com/download/66R.sh&amp;&amp;bash</a> 66R.sh</p></blockquote><p>根据提示，输入密码、端口、加密方式等信息，一路回车。安装完成后，ShadowsocksR的配置信息将显示为红色。</p><h1 id="4-安装锐速破解版"><a href="#4-安装锐速破解版" class="headerlink" title="4 安装锐速破解版"></a>4 安装锐速破解版</h1><p>继续输入以下命令：</p><blockquote><p>wget –no-check-certificate -O appex.sh <a href="https://raw.githubusercontent.com/0oVicero0/serverSpeeder_Install/master/appex.sh" target="_blank" rel="noopener">https://raw.githubusercontent.com/0oVicero0/serverSpeeder_Install/master/appex.sh</a> &amp;&amp; bash appex.sh install ‘2.6.32-642.el6.x86_64’</p></blockquote><p>系统将自行下载脚本文件并运行，一路回车即可完成安装。</p><h1 id="5-本地使用"><a href="#5-本地使用" class="headerlink" title="5 本地使用"></a>5 本地使用</h1><p>安装Shadowsocks安卓版或PC版，按照第三节提示的信息添加服务器配置，即可使用。</p>]]></content>
+    
+    <summary type="html">
+    
+      简要说明基于Vultr搭建SS/SSR服务器的步骤
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Vultr" scheme="http://yoursite.com/tags/Vultr/"/>
+    
+      <category term="SS" scheme="http://yoursite.com/tags/SS/"/>
+    
+      <category term="SSR" scheme="http://yoursite.com/tags/SSR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BIMServer的安装与部署</title>
+    <link href="http://yoursite.com/2019/09/02/BIMServer%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/"/>
+    <id>http://yoursite.com/2019/09/02/BIMServer%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%83%A8%E7%BD%B2/</id>
+    <published>2019-09-02T08:26:29.000Z</published>
+    <updated>2020-11-28T15:44:36.508Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-下载安装JRE"><a href="#1-下载安装JRE" class="headerlink" title="1 下载安装JRE"></a>1 下载安装JRE</h1><p>本机位win10 64位，应选择64位JRE下载。<br>最新版本文件如下：jre-8u221-windows-x64.exe。</p><h1 id="2-下载安装BIMServer及插件"><a href="#2-下载安装BIMServer及插件" class="headerlink" title="2 下载安装BIMServer及插件"></a>2 下载安装BIMServer及插件</h1><p>BIMServer安装包、插件及测试数据已有Github用户<em>ibrucekong</em>提供下载，链接为：<a href="https://codeload.github.com/ibrucekong/bimserver-env/zip/master" target="_blank" rel="noopener">https://codeload.github.com/ibrucekong/bimserver-env/zip/master</a>。<br>在不包含空格和中文的文件夹路径下，新建文件夹bimserver将下载的压缩包中的bimserverjar-1.5.88.jar文件放入，双击启动即可开始安装。</p><a id="more"></a><h1 id="3-配置BIMServer"><a href="#3-配置BIMServer" class="headerlink" title="3 配置BIMServer"></a>3 配置BIMServer</h1><p>Address设置为本机IP。maxHeapSize设置为合理大小，最好保证2G以上。<br>点击Start等待日志文本框出现一下字样：</p><blockquote><p><em>[main]: Server started successfully</em></p></blockquote><p>点击 Launch Webbrowser打开浏览器配置界面，设置服务名称、用户名账号、密码等，跳过email服务。<br>安装所有插件，选择<em>upload JAR files of plugins</em>，手动选择所有文件。<br>Finish界面点击 Setup，开始安装，等待安装完毕，日志框出现：</p><blockquote><p><em>Setup Successful……</em></p></blockquote><h1 id="4-使用bimviews"><a href="#4-使用bimviews" class="headerlink" title="4 使用bimviews"></a>4 使用bimviews</h1><p>配置完毕后，刷新页面。出现WebModules，主要使用的是bimviews，点击打开即可使用。</p>]]></content>
+    
+    <summary type="html">
+    
+      简要说明BIMServer的安装与部署
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="BIMServer" scheme="http://yoursite.com/tags/BIMServer/"/>
+    
+      <category term="bimviews" scheme="http://yoursite.com/tags/bimviews/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于hexo与github的博客系统搭建</title>
+    <link href="http://yoursite.com/2019/08/30/%E5%9F%BA%E4%BA%8EHexo%E4%B8%8EGithub%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA/"/>
+    <id>http://yoursite.com/2019/08/30/%E5%9F%BA%E4%BA%8EHexo%E4%B8%8EGithub%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%E6%90%AD%E5%BB%BA/</id>
+    <published>2019-08-30T09:05:18.000Z</published>
+    <updated>2020-11-28T15:44:36.510Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-软件准备"><a href="#1-软件准备" class="headerlink" title="1 软件准备"></a>1 软件准备</h1><ul><li>注册Github，假设用户名为test。</li><li>新建一个与用户名同名github.io仓库，即<em>test.github.io</em>，最后博客的访问地址也是<em>test.github.io</em>。</li><li>安装Git软件，配置SSHKey，实现Git与Github的认证连接，参考《Git与Github的使用一文》。</li><li>安装Node.js软件</li></ul><h1 id="2-安装配置Hexo"><a href="#2-安装配置Hexo" class="headerlink" title="2 安装配置Hexo"></a>2 安装配置Hexo</h1><ul><li><p>安装hexo<br>  使用cmd执行命令</p><blockquote><p><em>npm install -g hexo</em></p></blockquote><a id="more"></a></li><li><p>初始化hexo<br>  新建一个本地文件夹，如E:\Blog保存博客系统文件，命令如下：</p><blockquote><p><em>cd /e/Blog/</em><br><em>hexo init</em></p></blockquote></li><li><p>配置部署信息<br>  修改Blog文件夹下的_config.yml文件的deploy部分,如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:test&#x2F;test.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li><li><p>安装部署插件<br>  执行命令：</p><blockquote><p><em>npm install hexo-deployer-git –save</em></p></blockquote></li></ul><h1 id="3-使用Hexo写博客"><a href="#3-使用Hexo写博客" class="headerlink" title="3 使用Hexo写博客"></a>3 使用Hexo写博客</h1><ul><li><p>新建博客文章<br>  执行命令</p><blockquote><p><em>hexo new “postName” #新建文章</em><br><em>hexo new page “pageName” #新建页面</em></p></blockquote><p>  执行命令后，在source/_posts文件夹下生成对应的md文件，使用markdown语法撰写文章。</p></li><li><p>生成博客<br>  执行命令</p><blockquote><p><em>hexo g</em></p></blockquote></li><li><p>预览博客<br>  执行以下命令，可在浏览器预览博客文章（<a href="http://localhost:4000）。">http://localhost:4000）。</a></p><blockquote><p><em>hexo s</em></p></blockquote></li><li><p>发布博客到Github<br>  执行以下命令。执行过程中会要求输入密码。</p><blockquote><p><em>hexo d</em></p></blockquote></li></ul><h1 id="4-博客美化"><a href="#4-博客美化" class="headerlink" title="4 博客美化"></a>4 博客美化</h1><p>头像图片、作者名字、网站描述、评论、搜索、统计等网站属性都在根目录的_config.yml文件里配置。</p>]]></content>
+    
+    <summary type="html">
+    
+      简要说明基于Github和Hexo搭建一个博客系统
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git与Github的使用</title>
+    <link href="http://yoursite.com/2019/08/30/Git%E4%B8%8EGithub%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/08/30/Git%E4%B8%8EGithub%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2019-08-30T08:46:27.000Z</published>
+    <updated>2020-11-28T15:44:36.508Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-注册Github"><a href="#1-注册Github" class="headerlink" title="1 注册Github"></a>1 注册Github</h1><p>注册完成之后会需要验证邮箱才能正常使用GitHub。<br>注册完成后，创建一个属于自己的库，包括库的名字，以及对库的介绍。</p><h1 id="2-安装Git"><a href="#2-安装Git" class="headerlink" title="2 安装Git"></a>2 安装Git</h1><p>首先进入<a href="www.git-scm.com">Git官网</a>下载适合自己电脑的版本，执行默认安装选项。</p><a id="more"></a><h1 id="3-配置密钥"><a href="#3-配置密钥" class="headerlink" title="3 配置密钥"></a>3 配置密钥</h1><p>在本地创建ssh key并填写到Github网站，实现本地git与Github的认证连接。</p><ul><li><p>执行以下命令。邮箱为注册Github的邮箱，注意输入对应密码，其他选项可默认。</p><blockquote><p><em>ssh-keygen -t rsa -C “<a href="mailto:your_email@youremail.com">your_email@youremail.com</a>“</em></p></blockquote></li><li><p>在<strong><em>c:/user/用户名/.ssh</em></strong>这个文件夹下找到<strong><em>id_rsa.pub</em></strong>文件复制密钥内容。</p></li><li><p>登录Github，在Setting—SSH and GPG Keys页面下点击New SSH Key按钮，取名并粘贴密钥内容，保存。</p></li><li><p>执行命令，绑定用户信息.</p><blockquote><p><em>ssh -T <a href="mailto:git@github.com">git@github.com</a></em><br><em>git config –global user.name “github-username”</em><br><em>git config –global user.email “you-email”</em></p></blockquote></li></ul><h1 id="4-测试Git与Github连接"><a href="#4-测试Git与Github连接" class="headerlink" title="4 测试Git与Github连接"></a>4 测试Git与Github连接</h1><p>依次执行命令：</p><ul><li><p>定位D盘根目录</p><blockquote><p><em>cd  /D</em></p></blockquote></li><li><p>创建文件夹</p><blockquote><p><em>mkdir testProject</em><br><em>cd testProject</em></p></blockquote></li><li><p>克隆代码库，增加代码并提交</p><blockquote><p><em>git clone <a href="https://github.com/username/test.git" target="_blank" rel="noopener">https://github.com/username/test.git</a></em><br><em>cd test</em><br><em>echo “No Content” &gt; test.cpp</em><br><em>git add test.cpp</em><br><em>git commit -m “test commit”</em><br><em>git push origin master</em></p></blockquote></li><li><p>提交完毕后，打开Github网站，查看Test项目是否增加代码文件test.cpp</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      简要说明Git与Github的使用
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Github" scheme="http://yoursite.com/tags/Github/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>三种开源库实现GIS坐标转换</title>
+    <link href="http://yoursite.com/2018/12/04/%E4%B8%89%E7%A7%8D%E5%BC%80%E6%BA%90%E5%BA%93%E5%AE%9E%E7%8E%B0GIS%E5%9D%90%E6%A0%87%E8%BD%AC%E6%8D%A2/"/>
+    <id>http://yoursite.com/2018/12/04/%E4%B8%89%E7%A7%8D%E5%BC%80%E6%BA%90%E5%BA%93%E5%AE%9E%E7%8E%B0GIS%E5%9D%90%E6%A0%87%E8%BD%AC%E6%8D%A2/</id>
+    <published>2018-12-04T10:35:33.000Z</published>
+    <updated>2020-11-28T15:40:22.046Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-Proj-4"><a href="#1-Proj-4" class="headerlink" title="1 Proj.4"></a>1 Proj.4</h1><p>通过坐标系proj4字符串创建projPJ类型坐标系，调用pj_transform函数实现。其中坐标系proj4字符串可在PROJ4-data文件夹中的epsg文件中搜索得到。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> x = dblSrcX;</span><br><span class="line"><span class="keyword">double</span> y = dblSrcY;</span><br><span class="line"><span class="keyword">double</span> z = dblSrcZ;</span><br><span class="line"></span><br><span class="line">projPJ fRef, tRef;</span><br><span class="line">tRef = pj_init_plus(strDstProj.c_str());</span><br><span class="line">fRef = pj_init_plus(strSrcProj.c_str());</span><br><span class="line"></span><br><span class="line">pj_transform(fRef, tRef, <span class="number">1</span>, <span class="number">1</span>, &amp;x, &amp;y, &amp;z);</span><br></pre></td></tr></table></figure><a id="more"></a><h1 id="2-GDAL"><a href="#2-GDAL" class="headerlink" title="2 GDAL"></a>2 GDAL</h1><p>GDAL底层坐标转换对Proj.4接口进行了封装，设置坐标系的方式变得更加多样。支持常用名、EPSG码、WKT、Proj4等多种方式。对坐标转换功能也进行了面向对象封装。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> dbx = dbLon;</span><br><span class="line"><span class="keyword">double</span> dby = dbLat;</span><br><span class="line"><span class="keyword">double</span> dbz = dbHgt；</span><br><span class="line"></span><br><span class="line">OGRSpatialReference fRef, tRef;</span><br><span class="line">fRef.SetWellKnownGeogCS(<span class="string">"WGS84"</span>);</span><br><span class="line"><span class="comment">//EPSG::4547 CGCS2000 / 3-degree Gauss-Kruger CM 114E </span></span><br><span class="line">tRef.importFromEPSG(<span class="number">4547</span>);</span><br><span class="line"></span><br><span class="line">OGRCoordinateTransformation *coordTrans;</span><br><span class="line">coordTrans = OGRCreateCoordinateTransformation(&amp;fRef, &amp;tRef);</span><br><span class="line">coordTrans-&gt;Transform(<span class="number">1</span>, &amp;dbx, &amp;dby, &amp;dbz);</span><br></pre></td></tr></table></figure><h1 id="3-osgEarth"><a href="#3-osgEarth" class="headerlink" title="3 osgEarth"></a>3 osgEarth</h1><p>osgEarth坐标转换进一步调用了GDAL的坐标转换接口，使用更加方便。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">osg::ref_ptr&lt;osgEarth::SpatialReference&gt; pSrcSRS;</span><br><span class="line">osg::ref_ptr&lt;osgEarth::SpatialReference&gt; pDstSRS;</span><br><span class="line"></span><br><span class="line">pSrcSRS = osgEarth::SpatialReference::createFromPROJ4(strSrcProj);</span><br><span class="line">pDstSRS = osgEarth::SpatialReference::createFromPROJ4(strDstProj);</span><br><span class="line"></span><br><span class="line">osg::Vec3d vecOut;</span><br><span class="line">pSrcSRS-&gt;transform(vecPositon, pDstSRS, vecOut);</span><br></pre></td></tr></table></figure><p>以上三种GIS开源库都可方便实现坐标转换。具体实践过程中，可根据项目开源库的依赖情况灵活选用。</p>]]></content>
+    
+    <summary type="html">
+    
+      介绍了三种开源库实现GIS坐标准换的方法
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+      <category term="GIS" scheme="http://yoursite.com/tags/GIS/"/>
+    
+      <category term="坐标准换" scheme="http://yoursite.com/tags/%E5%9D%90%E6%A0%87%E5%87%86%E6%8D%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式七大原则总结</title>
+    <link href="http://yoursite.com/2018/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/09/14/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99%E6%80%BB%E7%BB%93/</id>
+    <published>2018-09-14T00:49:09.000Z</published>
+    <updated>2020-09-13T10:15:07.223Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-单一职责原则-Single-Responsibility-Principle"><a href="#1-单一职责原则-Single-Responsibility-Principle" class="headerlink" title="1 单一职责原则(Single Responsibility Principle)"></a>1 单一职责原则(Single Responsibility Principle)</h1><p>目的：降低代码复杂度、系统解耦合、提高可读性</p><p>含义：对于一个类，只有一个引起该类变化的原因；该类的职责是唯一的，且这个职责是唯一引起其他类变化的原因。</p><p>解决：将不同的职责封装到不同的类或者模块中。 当有新的需求将现有的职责分为颗粒度更小的职责的时候，应该及时对现有代码进行重构。当系统逻辑足够简单，方法足够少，子类够少或后续关联够少时，也可以不必严格遵循你SRP原则，避免过度设计、颗粒化过于严重。</p><a id="more"></a><p>实例：电线类Wire为居民供电，电压为220v；但是新的需求增加，电线也输送高压电，电压为200kv，原有电线类可以增加方法实现扩充，这就违背了单一职责原则。可以提供基类，创建两个派生类，居民供电线、高压输电线。</p><h1 id="2-里氏代换原则（Liskov-Substitution-Principle）"><a href="#2-里氏代换原则（Liskov-Substitution-Principle）" class="headerlink" title="2 里氏代换原则（Liskov Substitution Principle）"></a>2 里氏代换原则（Liskov Substitution Principle）</h1><p>目的：避免系统继承体系被破坏</p><p>含义：所有引用基类的地方必须能透明地使用其子类的对象。</p><p>解决：子类可以实现父类的抽象方法，但是不能覆盖父类的非抽象方法；子类中可以增加自己特有的方法；当子类覆盖或实现父类的方法时，方法的前置条件（即方法的形参）要比父类方法的输入参数更宽松；当子类的方法实现父类的抽象方法时，方法的后置条件（即方法的返回值）要比父类更严格。如果子类不能完整地实现父类的方法，或者父类的一些方法在子类中已经发生畸变，则建议断开继承关系，采用依赖，聚合，组合等关系代替继承。</p><p>实例：已经定义鸟类具有两个翅膀飞的方法；新加入鸵鸟，不会飞，如果覆盖父类的方法，在两个翅膀飞的方法中什么也不做，就违背里氏替换原则，导致所有鸟都不会飞。应该创建并列的两种鸟基类，会飞与不会飞的。前置条件更宽松、后置条件更严格，比如父类返回Map，子类返回HashMap；父类接受HashMap形参，子类接受Map。</p><h1 id="3-依赖倒转原则（Dependence-Inversion-Principle）"><a href="#3-依赖倒转原则（Dependence-Inversion-Principle）" class="headerlink" title="3 依赖倒转原则（Dependence Inversion Principle）"></a>3 依赖倒转原则（Dependence Inversion Principle）</h1><p>目的：避免需求变化导致过多的维护工作</p><p>含义：高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。</p><p>解决：面向接口编程，使用接口或者抽象类制定好规范和契约，而不去涉及任何具体的操作，把展现细节的任务交给他们的实现类去完成。</p><p>实例：母亲类Mother有讲故事方法TellStory，依赖一个Book类输入，并使用了Book类的getContent方法以便讲故事。那么下次需要母亲讲报纸上的故事、手机上的故事时，原有接口无能为力。这时，抽象一个包含getContent方法的IReader基类，Book、Newspaper、Cellphone各自实现。母亲的TellStory方法接受一个IReader实例，并调用getContent方法即可。</p><h1 id="4-接口隔离原则（Interface-Segregation-Principle）"><a href="#4-接口隔离原则（Interface-Segregation-Principle）" class="headerlink" title="4 接口隔离原则（Interface Segregation Principle）"></a>4 接口隔离原则（Interface Segregation Principle）</h1><p>目的：避免接口过于臃肿</p><p>含义：客户端不应该依赖它不需要的接口，一个类对另一个类的依赖应该建立在最小的接口上。</p><p>解决：适度细化接口，将臃肿的接口拆分为独立的几个接口。</p><p>实例：考试接口，包含考语数外、理化生、政史地等方法。学生类，实现考试接口，参加考试。文科生类、理科生类派生自学生类，实现考试接口时，就都需要实现一些自己不需要的方法（因为文科生不考理化生、理科生不考政史地）。这时，需要对考试接口进行细化，分为基础科考试接口、文科考试接口和理科考试接口；学生类实现基础科考试接口；文科生、理科生另外各自实现文科考试接口、理科考试接口。</p><h1 id="5-迪米特法则（Demeter-Principle）"><a href="#5-迪米特法则（Demeter-Principle）" class="headerlink" title="5 迪米特法则（Demeter Principle）"></a>5 迪米特法则（Demeter Principle）</h1><p>目的：降低类与类之间的耦合</p><p>含义：每一个软件单位对其他的单位都只有最少的知识，而且局限于那些与本单位密切相关的软件单位。</p><p>解决：不发生依赖、关联、组合、聚合等耦合关系的陌生类不要作为局部变量的形式出现在类的内部。</p><p>实例：校长管理老师，老师管理学生。校长需要全体点名时，首先对老师点名，但是不必通过老师获取学生的信息并点名，而应该让老师对各自管理学生的点名，否则校长和学生之间就发生了原本不必要的耦合，这样当学生类发生变化时，既要修改老师类，也要修改校长类。</p><h1 id="6-合成复用原则（Composite-Reuse-Principle）"><a href="#6-合成复用原则（Composite-Reuse-Principle）" class="headerlink" title="6 合成复用原则（Composite Reuse Principle）"></a>6 合成复用原则（Composite Reuse Principle）</h1><p>目的：防止类的体系庞大</p><p>含义：当要扩展类的功能时，优先考虑使用合成/聚合，而不是继承。</p><p>解决：当类与类之间的关系是”Is-A”时，用继承；当类与类之间的关系是”Has-A”时，用组合。</p><p>实例：如桥接模式，抽象和实现可以独立的变化，扩展功能时，增加实现类即可；比如装饰模式，只需要一个类，即可为一类类扩展新功能。对于显示图形需求，用图形Shape类，和显示Paint类实现。每个Shape类有一个Paint类指针负责图形绘制显示。Paint类派生RedPaint类和BluePaint类，传递给Shape类，实现图形不同颜色绘制，这样图形绘制逻辑和图形绘制实现可独立变化。某天增加需求，所有的绘制需要加边框，可增加PaintDecorator类，派生自Paint基类，每一个PaintDecorator类有一个Paint对象指针，增加虚函数AddedPaint，重写Paint的绘制方法，增加AddedPaint方法的调用。增加BorderPaintDecorator类，派生自PaintDecorator类，重写AddedPaint方法，增加添加绘制边框代码。这样新增加一个类可以对原始所有画笔类的功能进行扩充。</p><h1 id="7-开闭原则（Open-Close-Principle）"><a href="#7-开闭原则（Open-Close-Principle）" class="headerlink" title="7 开闭原则（Open Close Principle）"></a>7 开闭原则（Open Close Principle）</h1><p>目的：提高扩展性、便于维护</p><p>含义：对扩展开放，对修改封闭。即系统进行扩展是被鼓励的，对现有系统代码进行修改是不被支持的。也就是说，当软件有新的需求变化的时候，只需要通过对软件框架进行扩展来适应新的需求，而不是对框架内部的代码进行修改。</p><p>解决：设计模式前面6大原则以及23种设计模式遵循的好，开闭原则自然遵守的好。对需求的变更保持前瞻性和预见性，就可以使抽象具有更广泛适用性，设计出的软件架构就能相对稳定。软件需求中易变的细节，通过从抽象派生出实现类来扩展。</p><p>附：合成复用原则的实例代码，组合使用桥接模式和装饰模式</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//绘制类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Paint</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Draw</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//红色绘制类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RedPaint</span> :</span> <span class="keyword">public</span> Paint</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Draw</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Color Red!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//蓝色绘制类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BluePaint</span> :</span> <span class="keyword">public</span> Paint</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Draw</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Color Blue!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//图形类，使用桥接模式，将图形绘制逻辑与绘制实现解耦</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Shape</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">Shape(Paint* pt) : m_pPt(pt)</span><br><span class="line">&#123; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Show</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Shape Style:"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">m_pPt-&gt;Draw();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">Paint* m_pPt;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//长方形类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> :</span> <span class="keyword">public</span> Shape</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">Rectangle(Paint* pt) : Shape(pt)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//圆形类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> :</span> <span class="keyword">public</span> Shape</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">Circle(Paint* pt) : Shape(pt)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//附加绘制类，使用装饰模式，对原有绘制类进行功能扩展</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PaintDecorator</span> :</span> <span class="keyword">public</span> Paint</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">PaintDecorator(Paint* pt) : m_pPt(pt) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Draw</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">m_pPt-&gt;Draw();</span><br><span class="line">AddedPaint();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">AddedPaint</span><span class="params">()</span> </span>= <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">Paint* m_pPt;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//附加边框类，对绘制类添加边框绘制功能</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BorderDecorator</span> :</span> <span class="keyword">public</span> PaintDecorator</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">BorderDecorator(Paint* pt) : PaintDecorator(pt)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">AddedPaint</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"With Border!"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">Shape* pShape = <span class="keyword">new</span> Circle(<span class="keyword">new</span> BorderDecorator(<span class="keyword">new</span> RedPaint()));</span><br><span class="line">pShape-&gt;Show();</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      总结介绍了设计模式七大原则及代码举例
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="C++" scheme="http://yoursite.com/tags/C/"/>
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Regsvr32在64位机器上的用法</title>
+    <link href="http://yoursite.com/2017/03/23/Regsvr32%E5%9C%A864%E4%BD%8D%E6%9C%BA%E5%99%A8%E4%B8%8A%E7%9A%84%E7%94%A8%E6%B3%95/"/>
+    <id>http://yoursite.com/2017/03/23/Regsvr32%E5%9C%A864%E4%BD%8D%E6%9C%BA%E5%99%A8%E4%B8%8A%E7%9A%84%E7%94%A8%E6%B3%95/</id>
+    <published>2017-03-23T01:47:23.000Z</published>
+    <updated>2020-09-13T10:14:34.708Z</updated>
+    
+    <content type="html"><![CDATA[<p>regsvr32是windows上注册 OLE 控件（DLL 或 ActiveX ）的常用命令。注册 OLE 控件可更新 Windows 注册表中文件的位置和功能，从而使程序正常运行。32位系统注册32位控件，64位系统注册64位控件，一般都没有问题。一般容易出问题的是在64位操作系统上注册32位控件。</p><a id="more"></a><p>注意：64 位版本的 Windows 操作系统上有两个版本的 Regsv32.exe 文件。</p><blockquote><p>64 位版本是<code>%systemroot%\System32\regsvr32.exe</code></p><p>32 位版本是<code>%systemroot%\SysWoW64\regsvr32.exe</code></p></blockquote><p>SysWoW64中的“WoW”正是“Windows on Windows”的缩写，表示一个运行在64位操作系统环境下的32位子系统。因此要在64位操作系统上正确注册一个32位的OLE控件，要确保以下步骤：</p><blockquote><p>1.用管理员身份运行cmd；</p><p>2.cd到控件所在路径;</p><p>3.键入<code>%systemroot%\SysWoW64\regsvr32.exe xxx.ocx</code>并回车；</p></blockquote><p>为了能使32位的控件在32位操作系统与64位操作系统下都能正确自动注册，可采用批处理命令方式，在命令中自动判断操作系统是32位还是64位，并针对性调用不同的注册命令即可。具体方法如下：</p><p>在控件所在路径下创建一个txt，重命名为<strong>reg.bat</strong>文件。<br>键入以下命令并保存，注意修改为自己的控件文件名：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">reg Query <span class="string">"HKLM\Hardware\Description\System\CentralProcessor\0"</span> | find /i <span class="string">"x86"</span> &gt; NUL &amp;&amp; <span class="built_in">set</span> OS=32BIT || <span class="built_in">set</span> OS=64BIT</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> %OS%==32BIT %windir%\system32\regsvr32.exe <span class="string">"%~dp0QfltOCX.ocx"</span></span><br><span class="line"><span class="keyword">if</span> %OS%==64BIT %windir%\syswow64\regsvr32.exe <span class="string">"%~dp0QfltOCX.ocx"</span></span><br></pre></td></tr></table></figure><p>使用管理员身份运行reg.bat即可。</p><p>参考：</p><p><a href="http://stackoverflow.com/questions/12322308/batch-file-to-check-64bit-or-32bit-os/19804271#19804271" target="_blank" rel="noopener">http://stackoverflow.com/questions/12322308/batch-file-to-check-64bit-or-32bit-os/19804271#19804271</a></p><p><a href="https://support.microsoft.com/zh-cn/help/249873/how-to-use-the-regsvr32-tool-and-troubleshoot-regsvr32-error-messages" target="_blank" rel="noopener">https://support.microsoft.com/zh-cn/help/249873/how-to-use-the-regsvr32-tool-and-troubleshoot-regsvr32-error-messages</a></p>]]></content>
+    
+    <summary type="html">
+    
+      regsvr32在windows 64位操作系统中使用的注意事项
+    
+    </summary>
+    
+    
+      <category term="开发" scheme="http://yoursite.com/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Regsvr32" scheme="http://yoursite.com/tags/Regsvr32/"/>
+    
+      <category term="windows" scheme="http://yoursite.com/tags/windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>赠同门罗兄</title>
+    <link href="http://yoursite.com/2015/06/12/%E8%B5%A0%E5%90%8C%E9%97%A8%E7%BD%97%E5%85%84/"/>
+    <id>http://yoursite.com/2015/06/12/%E8%B5%A0%E5%90%8C%E9%97%A8%E7%BD%97%E5%85%84/</id>
+    <published>2015-06-11T17:42:17.000Z</published>
+    <updated>2020-12-17T06:17:35.590Z</updated>
+    
+    <content type="html"><![CDATA[<center>多情好似春风染，肆意常如夏雨殇。</center><a id="more"></a><center>莫把青春耽醉梦，一心北望赴苍黄。</center><br><!--more--><blockquote><p>四月二十五日，罗兄宴请师门，席间推杯换盏，畅舒情谊，一行人欣然而来，兴尽而去。吾念与君之过往，每每并肩同行，相谈甚欢。纵论天下，则慷慨激昂；感怀旧事，则唏嘘与共。吾感君之为人，唯率与诚；以诚相待者，则以诚相敬。盖为人若此，终自得福报。今君将北上，临行之日近，且自珍重！</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      赠同门罗兄
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://yoursite.com/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="诗" scheme="http://yoursite.com/tags/%E8%AF%97/"/>
+    
+      <category term="罗" scheme="http://yoursite.com/tags/%E7%BD%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>丑奴儿·近秋分</title>
+    <link href="http://yoursite.com/2014/09/21/%E4%B8%91%E5%A5%B4%E5%84%BF%C2%B7%E8%BF%91%E7%A7%8B%E5%88%86/"/>
+    <id>http://yoursite.com/2014/09/21/%E4%B8%91%E5%A5%B4%E5%84%BF%C2%B7%E8%BF%91%E7%A7%8B%E5%88%86/</id>
+    <published>2014-09-20T23:34:44.000Z</published>
+    <updated>2020-12-06T02:26:48.748Z</updated>
+    
+    <content type="html"><![CDATA[<center>清秋雨后山河冷，</center><center>夙梦难成。</center><a id="more"></a><center>夙梦难成，</center><center>故里依稀万户灯。</center><br><center>风来叶落年华剩，</center><center>此恨相争。</center><center>此恨相争，</center><center>入列新兵漫语声。</center>]]></content>
+    
+    <summary type="html">
+    
+      丑奴儿·近秋分
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://yoursite.com/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="秋分" scheme="http://yoursite.com/tags/%E7%A7%8B%E5%88%86/"/>
+    
+      <category term="词" scheme="http://yoursite.com/tags/%E8%AF%8D/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>中南病中作</title>
+    <link href="http://yoursite.com/2014/08/03/%E4%B8%AD%E5%8D%97%E7%97%85%E4%B8%AD%E4%BD%9C/"/>
+    <id>http://yoursite.com/2014/08/03/%E4%B8%AD%E5%8D%97%E7%97%85%E4%B8%AD%E4%BD%9C/</id>
+    <published>2014-08-03T11:26:49.000Z</published>
+    <updated>2020-12-06T02:43:17.527Z</updated>
+    
+    <content type="html"><![CDATA[<center>危楼转角新天地，病榻也恋铁骨躯。</center><center>谁道红颜空易老，且将年华付诗书。</center><br><blockquote><p>七月初二，吾染急疾，入住中南，居十八楼，有窗面北。其外新区，拓土筑楼，泥灰盈天；车辆往来，昼夜不息。吾居多日，病友来去者，多耄耋古稀，其过往之旧憾，命运之倏忽，长挂嘴舌。吾时听之，若有所思。吾因病急，仅携一书相随，乃钱穆先生之中国历史精神。先生一生，读书宏道，著书立说，笔耕不辍，其对中国历史文化之爱与敬，溢于笔尖，流于纸上。吾再卒读之，深感吾辈之为中国历史文化之继承与传承者，当有知道学道之智识，承道布道之责任，乃至卫道殉道之使命。谨诗记之。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      中南病中作
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://yoursite.com/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="中南" scheme="http://yoursite.com/tags/%E4%B8%AD%E5%8D%97/"/>
+    
+      <category term="诗" scheme="http://yoursite.com/tags/%E8%AF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>滁州行</title>
+    <link href="http://yoursite.com/2014/01/27/%E6%BB%81%E5%B7%9E%E8%A1%8C/"/>
+    <id>http://yoursite.com/2014/01/27/%E6%BB%81%E5%B7%9E%E8%A1%8C/</id>
+    <published>2014-01-26T22:58:11.000Z</published>
+    <updated>2020-12-06T02:27:36.780Z</updated>
+    
+    <content type="html"><![CDATA[<center>滁地有山，琅琊山也。是处有亭，醉翁亭也。</center><a id="more"></a><center>昔者欧公，醉情水山。文亭相丽，亭山相传。</center><center>今有徐生，慕名相访。蔚然深秀，谁与共赏。</center><center>心有佳人，念与时积。奈何两地，鞭长莫及。</center><center>山长水阔，辰星若若。遥寄尺素，愿与君说。</center>]]></content>
+    
+    <summary type="html">
+    
+      滁州行
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://yoursite.com/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="诗" scheme="http://yoursite.com/tags/%E8%AF%97/"/>
+    
+      <category term="滁州" scheme="http://yoursite.com/tags/%E6%BB%81%E5%B7%9E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>相</title>
+    <link href="http://yoursite.com/2013/11/22/%E7%9B%B8/"/>
+    <id>http://yoursite.com/2013/11/22/%E7%9B%B8/</id>
+    <published>2013-11-21T16:20:51.000Z</published>
+    <updated>2020-12-06T02:30:51.445Z</updated>
+    
+    <content type="html"><![CDATA[<center>相见因相识，相识渐相约，相约又相会，相会喜相知。</center><a id="more"></a><center>相知总相让，相让终相去，相去益相离，相离却相思。</center><center>相思日相忘，相忘于江湖，江湖竟相遇，还来复如此？</center>]]></content>
+    
+    <summary type="html">
+    
+      相
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://yoursite.com/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="诗" scheme="http://yoursite.com/tags/%E8%AF%97/"/>
+    
+      <category term="相" scheme="http://yoursite.com/tags/%E7%9B%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>腊月廿八</title>
+    <link href="http://yoursite.com/2012/01/21/%E8%85%8A%E6%9C%88%E5%BB%BF%E5%85%AB/"/>
+    <id>http://yoursite.com/2012/01/21/%E8%85%8A%E6%9C%88%E5%BB%BF%E5%85%AB/</id>
+    <published>2012-01-21T11:41:19.000Z</published>
+    <updated>2020-12-06T02:27:58.739Z</updated>
+    
+    <content type="html"><![CDATA[<center>灶里干柴火，锅中新沸汤。</center><center>初雪接年夜，畅饮话家常。</center>]]></content>
+    
+    <summary type="html">
+    
+      腊月廿八
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://yoursite.com/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="诗" scheme="http://yoursite.com/tags/%E8%AF%97/"/>
+    
+      <category term="腊月" scheme="http://yoursite.com/tags/%E8%85%8A%E6%9C%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>诉衷情·中秋寄舅父</title>
+    <link href="http://yoursite.com/2010/09/21/%E8%AF%89%E8%A1%B7%E6%83%85%C2%B7%E4%B8%AD%E7%A7%8B%E5%AF%84%E8%88%85%E7%88%B6/"/>
+    <id>http://yoursite.com/2010/09/21/%E8%AF%89%E8%A1%B7%E6%83%85%C2%B7%E4%B8%AD%E7%A7%8B%E5%AF%84%E8%88%85%E7%88%B6/</id>
+    <published>2010-09-21T13:54:49.000Z</published>
+    <updated>2020-12-06T02:29:06.377Z</updated>
+    
+    <content type="html"><![CDATA[<center>当年投笔赴戎装，</center><center>携幼苦备尝。</center><a id="more"></a><center>珞珈梦圆何处？</center><center>月明东湖浪。</center><br><center>佳侣伴，黄浦江，</center><center>赏夕阳。</center><center>此生只愿，</center><center>儿女膝下，闲话家常。</center>]]></content>
+    
+    <summary type="html">
+    
+      诉衷情·中秋寄舅父
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://yoursite.com/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="词" scheme="http://yoursite.com/tags/%E8%AF%8D/"/>
+    
+      <category term="诉衷情" scheme="http://yoursite.com/tags/%E8%AF%89%E8%A1%B7%E6%83%85/"/>
+    
+      <category term="中秋" scheme="http://yoursite.com/tags/%E4%B8%AD%E7%A7%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>天净沙·春</title>
+    <link href="http://yoursite.com/2009/10/21/%E5%A4%A9%E5%87%80%E6%B2%99%C2%B7%E6%98%A5/"/>
+    <id>http://yoursite.com/2009/10/21/%E5%A4%A9%E5%87%80%E6%B2%99%C2%B7%E6%98%A5/</id>
+    <published>2009-10-21T15:47:10.000Z</published>
+    <updated>2020-12-06T02:30:00.468Z</updated>
+    
+    <content type="html"><![CDATA[<center>清风柳叶鹅芽，</center><center>明窗细雨梨花，</center><a id="more"></a><center>浓墨净几帘下。</center><br><center>春光如画，</center><center>醉歌诗酒年华。</center>]]></content>
+    
+    <summary type="html">
+    
+      天净沙·春
+    
+    </summary>
+    
+    
+      <category term="诗词" scheme="http://yoursite.com/categories/%E8%AF%97%E8%AF%8D/"/>
+    
+    
+      <category term="词" scheme="http://yoursite.com/tags/%E8%AF%8D/"/>
+    
+      <category term="天净沙" scheme="http://yoursite.com/tags/%E5%A4%A9%E5%87%80%E6%B2%99/"/>
+    
+      <category term="春" scheme="http://yoursite.com/tags/%E6%98%A5/"/>
+    
+  </entry>
+  
+</feed>

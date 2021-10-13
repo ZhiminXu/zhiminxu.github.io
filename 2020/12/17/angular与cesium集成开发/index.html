@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>angular与cesium集成开发 | 北辰之远</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="angular前端框架与cesium引擎集成开发框架搭建">
-<meta name="keywords" content="Cesium,Angular">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angular与cesium集成开发">
-<meta property="og:url" content="http://yoursite.com/2020/12/17/angular与cesium集成开发/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/12/17/angular%E4%B8%8Ecesium%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="北辰之远">
 <meta property="og:description" content="angular前端框架与cesium引擎集成开发框架搭建">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-17T23:41:25.702Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-17T06:27:03.000Z">
+<meta property="article:modified_time" content="2020-12-17T23:44:23.321Z">
+<meta property="article:author" content="北辰之远">
+<meta property="article:tag" content="Cesium">
+<meta property="article:tag" content="Angular">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="angular与cesium集成开发">
-<meta name="twitter:description" content="angular前端框架与cesium引擎集成开发框架搭建">
   
     <link rel="alternative" href="/atom.xml" title="北辰之远" type="application/atom+xml">
   
@@ -47,8 +48,8 @@ var _hmt = _hmt || [];
 </script>
 
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -70,9 +71,9 @@ var _hmt = _hmt || [];
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/categories/开发/">开发</a></li>
+				<li><a href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li>
 	        
-				<li><a href="/categories/诗词/">诗词</a></li>
+				<li><a href="/categories/%E8%AF%97%E8%AF%8D/">诗词</a></li>
 	        
 			</ul>
 		</nav>
@@ -150,9 +151,9 @@ var _hmt = _hmt || [];
 				
 					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/categories/开发/">开发</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/categories/诗词/">诗词</a></li>
+					<li style="width: 33.333333333333336%"><a href="/categories/%E8%AF%97%E8%AF%8D/">诗词</a></li>
 		        
 				</ul>
 			</nav>
@@ -179,7 +180,7 @@ var _hmt = _hmt || [];
   
 
         
-        <a href="/2020/12/17/angular与cesium集成开发/" class="archive-article-date">
+        <a href="/2020/12/17/angular%E4%B8%8Ecesium%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/" class="archive-article-date">
   	<time datetime="2020-12-17T06:27:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-17</time>
 </a>
         
@@ -187,32 +188,29 @@ var _hmt = _hmt || [];
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-angular相关"><a href="#1-angular相关" class="headerlink" title="1. angular相关"></a>1. angular相关</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ng new ngArkWeb</span><br><span class="line">cd ngArkWeb</span><br><span class="line">ng add ng-zorro-antd</span><br></pre></td></tr></table></figure>
-
+        <h1 id="1-angular相关"><a href="#1-angular相关" class="headerlink" title="1 angular相关"></a>1 angular相关</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ng new ngArkWeb</span><br><span class="line">cd ngArkWeb</span><br><span class="line">ng add ng-zorro-antd</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 
-<h1 id="2-Cesium相关"><a href="#2-Cesium相关" class="headerlink" title="2. Cesium相关"></a>2. Cesium相关</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i cesium</span><br><span class="line">npm i @angular-builders/custom-webpack --save-dev</span><br></pre></td></tr></table></figure>
-
+<h1 id="2-Cesium相关"><a href="#2-Cesium相关" class="headerlink" title="2 Cesium相关"></a>2 Cesium相关</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i cesium</span><br><span class="line">npm i @angular-builders&#x2F;custom-webpack --save-dev</span><br></pre></td></tr></table></figure>
 <p>angular工程根目录创建配置文件extra-webpack.config.js</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  node: &#123;</span><br><span class="line">    fs: "empty",</span><br><span class="line">    Buffer: false,</span><br><span class="line">    http: "empty",</span><br><span class="line">    https: "empty",</span><br><span class="line">    zlib: "empty"</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    unknownContextCritical: false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h1 id="3-修改工程配置"><a href="#3-修改工程配置" class="headerlink" title="3. 修改工程配置"></a>3. 修改工程配置</h1><p>修改angular.json文件，在”src/assets”后面添加以下配置：</p>
+<h1 id="3-修改工程配置"><a href="#3-修改工程配置" class="headerlink" title="3 修改工程配置"></a>3 修改工程配置</h1><p>修改angular.json文件，在”src/assets”后面添加以下配置：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"glob"</span>: <span class="string">"**/*"</span>,</span><br><span class="line"><span class="attr">"input"</span>: <span class="string">"node_modules/cesium/Build/Cesium"</span>,</span><br><span class="line"><span class="attr">"output"</span>: <span class="string">"/assets/cesium"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>在”src/styles.css”后面添加以下配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;src/assets/ThirdParty/CesiumNavigation/cesium-navigation.css&quot;,</span><br><span class="line">&quot;node_modules/cesium/Build/Cesium/Widgets/widgets.css&quot;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;src&#x2F;assets&#x2F;ThirdParty&#x2F;CesiumNavigation&#x2F;cesium-navigation.css&quot;,</span><br><span class="line">&quot;node_modules&#x2F;cesium&#x2F;Build&#x2F;Cesium&#x2F;Widgets&#x2F;widgets.css&quot;,</span><br></pre></td></tr></table></figure>
 
 <p>在scripts:[]方括号中添加以下配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;node_modules/cesium/Build/Cesium/Cesium.js&quot;,</span><br><span class="line">&quot;src/assets/ThirdParty/CesiumNavigation/CesiumNavigation.umd.js&quot;,</span><br><span class="line">&quot;src/assets/ThirdParty/Other/DOM/dom-to-image.min.js&quot;,</span><br><span class="line">&quot;src/assets/ArkWeb.js&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;node_modules&#x2F;cesium&#x2F;Build&#x2F;Cesium&#x2F;Cesium.js&quot;,</span><br><span class="line">&quot;src&#x2F;assets&#x2F;ThirdParty&#x2F;CesiumNavigation&#x2F;CesiumNavigation.umd.js&quot;,</span><br><span class="line">&quot;src&#x2F;assets&#x2F;ThirdParty&#x2F;Other&#x2F;DOM&#x2F;dom-to-image.min.js&quot;,</span><br><span class="line">&quot;src&#x2F;assets&#x2F;ArkWeb.js&quot;</span><br></pre></td></tr></table></figure>
 
 <p>在scripts:[]后添加以下配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;customWebpackConfig&quot;: &#123;</span><br><span class="line">    &quot;path&quot;: &quot;./extra-webpack.config.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;customWebpackConfig&quot;: &#123;</span><br><span class="line">    &quot;path&quot;: &quot;.&#x2F;extra-webpack.config.js&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在tsconfig.js文件的  “angularCompilerOptions” 选项中添加以下配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;enableIvy&quot;: false,</span><br></pre></td></tr></table></figure>
 
+
 <p>在serve 与 build选项组中，修改builder属性，从 angular-devkit/build-angular 修改为 angular-builders/custom-webpack</p>
-<h1 id="4-修改代码"><a href="#4-修改代码" class="headerlink" title="4. 修改代码"></a>4. 修改代码</h1><p>在main.ts中添加以下代码：</p>
+<h1 id="4-修改代码"><a href="#4-修改代码" class="headerlink" title="4 修改代码"></a>4 修改代码</h1><p>在main.ts中添加以下代码：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>[<span class="string">'CESIUM_BASE_URL'</span>] = <span class="string">'/assets/cesium/'</span>;</span><br></pre></td></tr></table></figure>
       
 
@@ -328,7 +326,7 @@ var _hmt = _hmt || [];
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/12/17/angular与cesium集成开发/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/12/17/angular%E4%B8%8Ecesium%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -343,7 +341,7 @@ var _hmt = _hmt || [];
 <nav id="article-nav">
   
   
-    <a href="/2020/11/27/OpenThreads三个线程顺序打印ABC/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/11/27/OpenThreads%E4%B8%89%E4%B8%AA%E7%BA%BF%E7%A8%8B%E9%A1%BA%E5%BA%8F%E6%89%93%E5%8D%B0ABC/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">OpenThreads三个线程顺序打印ABC</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -371,7 +369,7 @@ var _hmt = _hmt || [];
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-angular相关"><span class="toc-number">1.</span> <span class="toc-text">1. angular相关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Cesium相关"><span class="toc-number">2.</span> <span class="toc-text">2. Cesium相关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-修改工程配置"><span class="toc-number">3.</span> <span class="toc-text">3. 修改工程配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-修改代码"><span class="toc-number">4.</span> <span class="toc-text">4. 修改代码</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-angular相关"><span class="toc-number">1.</span> <span class="toc-text">1 angular相关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Cesium相关"><span class="toc-number">2.</span> <span class="toc-text">2 Cesium相关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-修改工程配置"><span class="toc-number">3.</span> <span class="toc-text">3 修改工程配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-修改代码"><span class="toc-number">4.</span> <span class="toc-text">4 修改代码</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -421,7 +419,7 @@ gitalk.render('gitalk-container')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 北辰之远
+    		&copy; 2021 北辰之远
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -512,7 +510,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color2">Cesium</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,7 +518,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Cesium</a>
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -540,6 +538,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Regsvr32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">windows</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Vultr</a>
               </li>
              
@@ -556,19 +562,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Regsvr32</a>
+                <a href="javascript:void(0)" class="js-tag color4">GIS</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">windows</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">秋分</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">词</a>
+                <a href="javascript:void(0)" class="js-tag color5">坐标准换</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -584,6 +582,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">秋分</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">词</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">中南</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">诗</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">天净沙</a>
               </li>
              
@@ -592,19 +610,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">腊月</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">诗</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">GIS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">坐标准换</a>
+                <a href="javascript:void(0)" class="js-tag color3">滁州</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,19 +618,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">滁州</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">中南</a>
+                <a href="javascript:void(0)" class="js-tag color3">腊月</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">

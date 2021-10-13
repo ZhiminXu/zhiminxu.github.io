@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    <url>
+        <loc>http://yoursite.com/tags/Angular/</loc>
+        <lastmod>2020-12-17T23:44:23.321Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/Cesium/</loc>
+        <lastmod>2020-12-17T23:44:23.321Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E7%25BD%2597/</loc>
+        <lastmod>2020-12-17T06:17:35.590Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E8%25AF%2597/</loc>
+        <lastmod>2020-12-17T06:17:35.590Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E4%25B8%25AD%25E5%258D%2597/</loc>
+        <lastmod>2020-12-06T02:43:17.527Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E7%259B%25B8/</loc>
+        <lastmod>2020-12-06T02:30:51.445Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E6%2598%25A5/</loc>
+        <lastmod>2020-12-06T02:30:00.468Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E5%25A4%25A9%25E5%2587%2580%25E6%25B2%2599/</loc>
+        <lastmod>2020-12-06T02:30:00.468Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E8%25AF%258D/</loc>
+        <lastmod>2020-12-06T02:30:00.468Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E4%25B8%25AD%25E7%25A7%258B/</loc>
+        <lastmod>2020-12-06T02:29:06.377Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E8%25AF%2589%25E8%25A1%25B7%25E6%2583%2585/</loc>
+        <lastmod>2020-12-06T02:29:06.377Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E8%2585%258A%25E6%259C%2588/</loc>
+        <lastmod>2020-12-06T02:27:58.739Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E6%25BB%2581%25E5%25B7%259E/</loc>
+        <lastmod>2020-12-06T02:27:36.780Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E7%25A7%258B%25E5%2588%2586/</loc>
+        <lastmod>2020-12-06T02:26:48.748Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/Hexo/</loc>
+        <lastmod>2020-11-28T15:44:36.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/Github/</loc>
+        <lastmod>2020-11-28T15:44:36.510Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/Git/</loc>
+        <lastmod>2020-11-28T15:44:36.508Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/bimviews/</loc>
+        <lastmod>2020-11-28T15:44:36.508Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/BIMServer/</loc>
+        <lastmod>2020-11-28T15:44:36.508Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/SSR/</loc>
+        <lastmod>2020-11-28T15:44:33.774Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/SS/</loc>
+        <lastmod>2020-11-28T15:44:33.774Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/Vultr/</loc>
+        <lastmod>2020-11-28T15:44:33.774Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E5%259D%2590%25E6%25A0%2587%25E5%2587%2586%25E6%258D%25A2/</loc>
+        <lastmod>2020-11-28T15:40:22.046Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/GIS/</loc>
+        <lastmod>2020-11-28T15:40:22.046Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/C/</loc>
+        <lastmod>2020-11-28T15:40:22.046Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E5%25A4%259A%25E7%25BA%25BF%25E7%25A8%258B/</loc>
+        <lastmod>2020-11-27T16:05:48.088Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/OSG/</loc>
+        <lastmod>2020-11-27T16:05:48.088Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/OpenThreads/</loc>
+        <lastmod>2020-11-27T16:05:48.088Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/%25E8%25AE%25BE%25E8%25AE%25A1%25E6%25A8%25A1%25E5%25BC%258F/</loc>
+        <lastmod>2020-09-13T10:15:07.223Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/windows/</loc>
+        <lastmod>2020-09-13T10:14:34.708Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/Regsvr32/</loc>
+        <lastmod>2020-09-13T10:14:34.708Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/OpenGL/</loc>
+        <lastmod>2020-09-13T10:13:40.142Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/unit-test/</loc>
+        <lastmod>2020-09-13T10:13:40.142Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://yoursite.com/tags/premake5/</loc>
+        <lastmod>2020-09-13T10:13:40.142Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->
