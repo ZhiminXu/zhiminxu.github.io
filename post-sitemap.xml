@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/2020/08/29/Cesium-%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/</loc>
+        <lastmod>2021-10-13T09:23:23.002Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite.com/2020/12/17/angular%E4%B8%8Ecesium%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91/</loc>
         <lastmod>2020-12-17T23:44:23.321Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -138,14 +146,6 @@
     <url>
         <loc>http://yoursite.com/2017/03/23/Regsvr32%E5%9C%A864%E4%BD%8D%E6%9C%BA%E5%99%A8%E4%B8%8A%E7%9A%84%E7%94%A8%E6%B3%95/</loc>
         <lastmod>2020-09-13T10:14:34.708Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://yoursite.com/2020/08/29/Cesium-%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/</loc>
-        <lastmod>2020-09-13T10:14:21.064Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
