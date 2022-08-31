@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-08-12T03:31:57.102Z</updated>
+  <updated>2022-08-31T12:42:31.704Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>项目经理的25个分析方法</title>
+    <link href="http://yoursite.com/2022/08/31/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E7%90%86%E7%9A%8425%E4%B8%AA%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2022/08/31/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E7%90%86%E7%9A%8425%E4%B8%AA%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95/</id>
+    <published>2022-08-31T12:37:39.000Z</published>
+    <updated>2022-08-31T12:42:31.704Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="1-决策树"><a href="#1-决策树" class="headerlink" title="1 决策树"></a>1 决策树</h1><p>决策+决策结果=树<br>分支代表决策，节点代表决策结果</p><h1 id="2-鱼骨图因果分析法"><a href="#2-鱼骨图因果分析法" class="headerlink" title="2 鱼骨图因果分析法"></a>2 鱼骨图因果分析法</h1><ul><li>整理问题型：各要素与特征值非原因关系，为结构构成</li><li>原因型：鱼头在右，为什么</li><li>对策型，鱼头在左，如何提高改善</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;1-决策树&quot;&gt;&lt;a href=&quot;#1-决策树&quot; class=&quot;headerlink&quot; title=&quot;1 决策树&quot;&gt;&lt;/a&gt;1 决策树&lt;/h1&gt;&lt;p&gt;决策+决策结果=树&lt;br&gt;分支代表决策，节点代表决策结果&lt;/p&gt;
+&lt;h1 id=&quot;2-鱼骨图因果分析法&quot;&gt;&lt;a hr
+      
+    
+    </summary>
+    
+    
+      <category term="项目管理" scheme="http://yoursite.com/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
+    
+    
+      <category term="项目管理" scheme="http://yoursite.com/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="PM" scheme="http://yoursite.com/tags/PM/"/>
+    
+      <category term="分析方法" scheme="http://yoursite.com/tags/%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>简明项目管理流程</title>
@@ -506,33 +537,6 @@
       <category term="诉衷情" scheme="http://yoursite.com/tags/%E8%AF%89%E8%A1%B7%E6%83%85/"/>
     
       <category term="中秋" scheme="http://yoursite.com/tags/%E4%B8%AD%E7%A7%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>天净沙·春</title>
-    <link href="http://yoursite.com/2009/10/21/%E5%A4%A9%E5%87%80%E6%B2%99%C2%B7%E6%98%A5/"/>
-    <id>http://yoursite.com/2009/10/21/%E5%A4%A9%E5%87%80%E6%B2%99%C2%B7%E6%98%A5/</id>
-    <published>2009-10-21T15:47:10.000Z</published>
-    <updated>2020-12-06T02:30:00.468Z</updated>
-    
-    <content type="html"><![CDATA[<center>清风柳叶鹅芽，</center><center>明窗细雨梨花，</center><a id="more"></a><center>浓墨净几帘下。</center><br><center>春光如画，</center><center>醉歌诗酒年华。</center>]]></content>
-    
-    <summary type="html">
-    
-      天净沙·春
-    
-    </summary>
-    
-    
-      <category term="诗词" scheme="http://yoursite.com/categories/%E8%AF%97%E8%AF%8D/"/>
-    
-    
-      <category term="词" scheme="http://yoursite.com/tags/%E8%AF%8D/"/>
-    
-      <category term="天净沙" scheme="http://yoursite.com/tags/%E5%A4%A9%E5%87%80%E6%B2%99/"/>
-    
-      <category term="春" scheme="http://yoursite.com/tags/%E6%98%A5/"/>
     
   </entry>
   
